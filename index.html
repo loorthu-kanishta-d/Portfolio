@@ -6,13 +6,24 @@
   <title>Loorthu Kanishta D - Portfolio</title>
   <style>
     /* Global Styles */
-    body { margin:0; font-family:'Segoe UI',Arial,sans-serif; background:#f4f6f9; color:#333; }
+    body {
+      margin:0;
+      font-family:'Source Code Pro', monospace;
+      background:#e6f2ff;
+      color:#222;
+      transition:background 0.5s ease;
+    }
     h1,h2,h3 { margin:0; font-weight:600; }
     a { color:#0078d7; text-decoration:none; }
     a:hover { text-decoration:underline; }
 
     /* Header */
-    header { background:linear-gradient(135deg,#0078d7,#00b4d8); color:#fff; text-align:center; padding:60px 20px; }
+    header {
+      background:linear-gradient(135deg,#66ccff,#003366);
+      color:#fff;
+      text-align:center;
+      padding:60px 20px;
+    }
     header h1 { font-size:2.5em; }
     header p { font-size:1.2em; margin-top:10px; }
 
@@ -22,11 +33,39 @@
 
     /* Sections */
     section { max-width:1000px; margin:40px auto; padding:20px; }
-    .card { background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin-bottom:30px; transition:transform 0.2s; }
+    .card {
+      background:#fff;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom:30px;
+      transition:transform 0.2s;
+    }
     .card:hover { transform:translateY(-5px); }
 
     /* Footer */
-    footer { background:#222; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+    footer {
+      background:#222;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+    }
+
+    /* Alternate Pattern Theme */
+    .pattern-alt {
+      background: repeating-linear-gradient(
+        45deg,
+        #e6f2ff,
+        #e6f2ff 20px,
+        #cce6ff 20px,
+        #cce6ff 40px
+      );
+    }
+    .pattern-alt .card {
+      background:#f9fcff;
+      border:1px solid #cce6ff;
+    }
   </style>
 </head>
 <body>
@@ -41,6 +80,9 @@
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
   </nav>
+  <button onclick="switchTheme()" style="margin-top:20px;padding:10px 20px;border:none;border-radius:5px;background:#fff;color:#003366;font-weight:bold;cursor:pointer;">
+    Change Theme
+  </button>
 </header>
 
 <section id="about">
@@ -101,6 +143,12 @@
 <footer>
   <p>&copy; 2026 Loorthu Kanishta D | Portfolio</p>
 </footer>
+
+<script>
+function switchTheme() {
+  document.body.classList.toggle("pattern-alt");
+}
+</script>
 
 </body>
 </html>
