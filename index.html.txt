@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loorthu Kanishta D - Portfolio</title>
+  <style>
+    /* Global Styles */
+    body { margin:0; font-family:'Segoe UI',Arial,sans-serif; background:#f4f6f9; color:#333; }
+    h1,h2,h3 { margin:0; font-weight:600; }
+    a { color:#0078d7; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    /* Header */
+    header { background:linear-gradient(135deg,#0078d7,#00b4d8); color:#fff; text-align:center; padding:60px 20px; }
+    header h1 { font-size:2.5em; }
+    header p { font-size:1.2em; margin-top:10px; }
+
+    /* Navigation */
+    nav { margin-top:20px; }
+    nav a { margin:0 15px; font-weight:500; color:#fff; }
+
+    /* Sections */
+    section { max-width:1000px; margin:40px auto; padding:20px; }
+    .card { background:#fff; padding:25px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin-bottom:30px; transition:transform 0.2s; }
+    .card:hover { transform:translateY(-5px); }
+
+    /* Footer */
+    footer { background:#222; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Loorthu Kanishta D</h1>
+  <p>Python Developer | AI Engineer | ML Engineer | Data Scientist</p>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="about">
+  <div class="card">
+    <h2>About Me</h2>
+    <p>Passionate Python Developer & AI Engineer specializing in automation, applied machine learning, and agentic AI systems. Skilled in building LLM-powered chatbots, RAG pipelines, and intelligent automation frameworks. Certified across AWS, Azure, and GCP, with proven ability to design and deploy production-grade solutions.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="card">
+    <h2>Core Skills</h2>
+    <ul>
+      <li>Python, SQL, Django, REST APIs</li>
+      <li>Machine Learning, Deep Learning, LLMs, RAG, AI Agents</li>
+      <li>Automation & DevOps: CI/CD, Jenkins, Git, ServiceNow, Splunk</li>
+      <li>Databases: MySQL, SQLite, SQL Server</li>
+      <li>Cloud Certifications: AWS ML Specialty, Azure AI Engineer Associate, GCP Cloud Developer</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="card">
+    <h2>Projects</h2>
+    <h3>AI-Based Bird Sound Analysis</h3>
+    <p>Developed ML pipeline using MFCC + LSTM for species classification, deployed with Bootstrap interface for biodiversity monitoring.</p>
+    <h3>LLM-Powered Chatbot</h3>
+    <p>Building chatbot applications with RAG pipelines and agent-based automation for enterprise conversational use cases.</p>
+    <h3>Incident Linking Automation (TCS)</h3>
+    <p>Converted manual runbook tasks into Python APIs, automating incident linking and streamlining enterprise workflows.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="card">
+    <h2>Experience</h2>
+    <h3>Tata Consultancy Services (TCS)</h3>
+    <p>Python Developer | Application Tool Programmer | June 2024 – Present</p>
+    <ul>
+      <li>Automated incident workflows with Python APIs integrating ServiceNow, Splunk, Jenkins, and Git.</li>
+      <li>Developed RESTful APIs and CI/CD pipelines for reliable deployments.</li>
+      <li>Built LLM-powered chatbot applications with RAG and agentic models.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="card">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:dloorthukanishta@gmail.com">dloorthukanishta@gmail.com</a></p>
+    <p>Phone: +91 9150108849</p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank">linkedin.com/in/loorthu-kanishta-d</a></p>
+    <p>GitHub: <a href="https://github.com/loorthu-kanishta-d" target="_blank">github.com/loorthu-kanishta-d</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Loorthu Kanishta D | Portfolio</p>
+</footer>
+
+</body>
+</html>
