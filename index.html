@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loorthu Kanishta D - Portfolio</title>
+  <title>Loorthu Kanishta D - Tech Portfolio</title>
   <style>
     /* Global Styles */
     body {
@@ -39,9 +39,17 @@
       border-radius:10px;
       box-shadow:0 4px 10px rgba(0,0,0,0.1);
       margin-bottom:30px;
-      transition:transform 0.2s;
+      transition:transform 0.3s, opacity 0.5s;
+      opacity:0;
+      animation: fadeInUp 1s forwards;
     }
     .card:hover { transform:translateY(-5px); }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
 
     /* Footer */
     footer {
@@ -52,8 +60,13 @@
       margin-top:40px;
     }
 
-    /* Alternate Pattern Theme */
-    .pattern-alt {
+    /* Theme Patterns */
+    .solid { background:#e6f2ff; }
+    .grid {
+      background: radial-gradient(#cce6ff 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .striped {
       background: repeating-linear-gradient(
         45deg,
         #e6f2ff,
@@ -62,13 +75,36 @@
         #cce6ff 40px
       );
     }
-    .pattern-alt .card {
-      background:#f9fcff;
-      border:1px solid #cce6ff;
+    .dark {
+      background:#111;
+      color:#eee;
     }
+    .dark .card { background:#222; color:#eee; }
+    .dark header { background:linear-gradient(135deg,#003366,#000); }
+
+    /* Responsive Design */
+    @media (max-width:768px) {
+      header h1 { font-size:1.8em; }
+      header p { font-size:1em; }
+      nav a { display:block; margin:10px 0; }
+      section { padding:10px; }
+    }
+
+    /* Buttons */
+    button {
+      margin:5px;
+      padding:10px 15px;
+      border:none;
+      border-radius:5px;
+      background:#fff;
+      color:#003366;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    button:hover { background:#0078d7; color:#fff; }
   </style>
 </head>
-<body>
+<body class="solid">
 
 <header>
   <h1>Loorthu Kanishta D</h1>
@@ -78,11 +114,15 @@
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
     <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
     <a href="#contact">Contact</a>
   </nav>
-  <button onclick="switchTheme()" style="margin-top:20px;padding:10px 20px;border:none;border-radius:5px;background:#fff;color:#003366;font-weight:bold;cursor:pointer;">
-    Change Theme
-  </button>
+  <div style="margin-top:20px;">
+    <button onclick="switchTheme('solid')">Solid Blue</button>
+    <button onclick="switchTheme('grid')">Grid Pattern</button>
+    <button onclick="switchTheme('striped')">Striped</button>
+    <button onclick="switchTheme('dark')">Dark Mode</button>
+  </div>
 </header>
 
 <section id="about">
@@ -130,6 +170,18 @@
   </div>
 </section>
 
+<section id="certifications">
+  <div class="card">
+    <h2>Certifications</h2>
+    <ul>
+      <li>AWS Certified Machine Learning – Specialty</li>
+      <li>AWS Certified Machine Learning Engineer – Associate</li>
+      <li>Microsoft Certified: Azure AI Engineer Associate (AI‑102)</li>
+      <li>Google Cloud Professional Cloud Developer</li>
+    </ul>
+  </div>
+</section>
+
 <section id="contact">
   <div class="card">
     <h2>Contact</h2>
@@ -141,12 +193,12 @@
 </section>
 
 <footer>
-  <p>&copy; 2026 Loorthu Kanishta D | Portfolio</p>
+  <p>&copy; 2026 Loorthu Kanishta D | Tech Portfolio</p>
 </footer>
 
 <script>
-function switchTheme() {
-  document.body.classList.toggle("pattern-alt");
+function switchTheme(pattern) {
+  document.body.className = pattern;
 }
 </script>
 
