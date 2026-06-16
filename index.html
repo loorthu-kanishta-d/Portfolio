@@ -10,7 +10,7 @@
 
   <style>
     :root{
-      --bg-1:#07040a;
+      --bg-1:#06040a;
       --rose-deep:#2b0718;
       --rose-mid:#7b2e6f;
       --rose-accent:#ff7fbf;
@@ -144,6 +144,11 @@
     .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted)}
     .contact-form button{display:inline-block;margin-top:8px;background:linear-gradient(90deg,var(--rose-mid),var(--rose-accent));color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700}
 
+    /* neat contact list */
+    .contact-list{display:grid;grid-template-columns:140px 1fr;gap:8px 18px;align-items:center}
+    .contact-list .label{color:#fff;font-weight:700}
+    .contact-list .value{color:var(--muted);word-break:break-word}
+
     /* sliding & zoom helpers */
     .slide-left{transform:translateX(-36px) scale(.98);opacity:.88}
     .slide-right{transform:translateX(36px) scale(.98);opacity:.88}
@@ -152,13 +157,13 @@
     @media (max-width:980px){
       .projects-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
       .page{padding:16px}
+      .contact-list{grid-template-columns:120px 1fr}
     }
 
     /* small utility */
     a { color: var(--rose-accent); text-decoration: none; }
     .muted { color: var(--muted); }
     .accent-text { color: var(--accent-text); }
-    .label { font-weight:600;color:#fff;font-size:0.95rem }
   </style>
 </head>
 <body>
@@ -183,10 +188,10 @@
           </div>
 
           <div style="margin-top:12px;color:var(--muted);font-size:0.92rem">
-            <div><span class="label">Email</span> — dloorthukanishta@gmail.com</div>
-            <div><span class="label">Location</span> — Chennai, India</div>
-            <div style="margin-top:6px"><span class="label">LinkedIn</span> — <a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
-            <div><span class="label">GitHub</span> — <a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
+            <div><strong style="color:#fff">Email</strong> — dloorthukanishta@gmail.com</div>
+            <div><strong style="color:#fff">Location</strong> — Chennai, India</div>
+            <div style="margin-top:6px"><strong style="color:#fff">LinkedIn</strong> — <a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
+            <div><strong style="color:#fff">GitHub</strong> — <a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
           </div>
         </div>
       </div>
@@ -437,24 +442,34 @@
           <p>I'm open to full-time roles and collaborations. Available for daytime, full-time positions — share a brief about your project or role and I'll respond promptly.</p>
 
           <div style="height:12px"></div>
-          <div class="contact-grid">
-            <div>
-              <p style="margin:6px 0"><strong>Email</strong><br>dloorthukanishta@gmail.com</p>
-              <p style="margin:6px 0"><strong>Location</strong><br>Chennai, India</p>
-              <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></p>
-              <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></p>
-            </div>
 
-            <div>
-              <form class="contact-form" onsubmit="handleContact(event)">
-                <input type="text" id="name" placeholder="Your Name" required />
-                <input type="email" id="email" placeholder="Email Address" required />
-                <input type="text" id="subject" placeholder="Subject" />
-                <textarea id="message" rows="6" placeholder="Write your message..." required></textarea>
-                <button type="submit" class="contact-btn btn">Send Message</button>
-              </form>
-            </div>
+          <!-- Neat aligned contact block -->
+          <div class="contact-list" aria-label="Contact details">
+            <div class="label">Email</div>
+            <div class="value">dloorthukanishta@gmail.com</div>
+
+            <div class="label">Location</div>
+            <div class="value">Chennai, India</div>
+
+            <div class="label">LinkedIn</div>
+            <div class="value"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
+
+            <div class="label">GitHub</div>
+            <div class="value"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
           </div>
+
+          <div style="height:14px"></div>
+
+          <form class="contact-form" onsubmit="handleContact(event)">
+            <input type="text" id="name" placeholder="Your Name" required />
+            <input type="email" id="email" placeholder="Email Address" required />
+            <input type="text" id="subject" placeholder="Subject" />
+            <textarea id="message" rows="5" placeholder="Write your message..." required></textarea>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+              <button type="submit" class="contact-btn btn">Send Message</button>
+              <div style="color:var(--muted);font-size:0.92rem">I'll reply promptly to daytime, full-time role inquiries.</div>
+            </div>
+          </form>
         </div>
       </section>
 
@@ -493,30 +508,6 @@
       alert('Thanks, ' + name + '! Your message has been noted. (Demo handler)');
       e.target.reset();
     }
-
-    // Animate progress bars when skills section enters viewport
-    const skillsObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          document.querySelectorAll('.progress > i').forEach((el)=>{
-            const w = el.style.width || '80%';
-            el.style.width = w;
-          });
-          skillsObserver.disconnect();
-        }
-      });
-    }, {threshold:0.25});
-    const skillsSection = document.querySelector('#skills');
-    if(skillsSection) skillsObserver.observe(skillsSection);
-
-    // subtle parallax for glow layers
-    const glowTop = document.querySelector('.glow-top');
-    const glowBottom = document.querySelector('.glow-bottom');
-    window.addEventListener('scroll', ()=>{
-      const y = window.scrollY;
-      if(glowTop) glowTop.style.transform = `translateY(${y * 0.02}px) rotate(-14deg)`;
-      if(glowBottom) glowBottom.style.transform = `translateY(${y * -0.02}px) rotate(10deg)`;
-    });
 
     // set year
     document.getElementById('year').textContent = new Date().getFullYear();
