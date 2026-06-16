@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loorthu Kanishta D — Portfolio</title>
+  <title>Loorthu Kanishta D — Portfolio & Resume</title>
 
-  <!-- Font: Poppins -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -17,6 +17,7 @@
       --panel-dark: rgba(6,4,10,0.78);
       --card-radius:12px;
       --max-width:1100px;
+      --glass: rgba(255,127,191,0.04);
     }
 
     *{box-sizing:border-box}
@@ -55,7 +56,7 @@
     }
     .stat strong{display:block;color:#fff;font-size:1.12rem}
 
-    /* Single-line contact row under header (centered on desktop, left on mobile) */
+    /* Single-line contact row under header */
     .single-line-contact{
       margin-top:6px;
       color:var(--muted);
@@ -72,46 +73,79 @@
     .single-line-contact a{color:var(--rose-accent);text-decoration:none}
     .single-line-contact .sep{color:rgba(255,127,191,0.18);margin:0 6px}
 
-    /* Main sections */
+    /* Sections container */
     .sections{display:flex;flex-direction:column;gap:22px;margin-top:20px}
 
+    /* Alternating section layout */
     .section{
       display:grid;
       grid-template-columns:1fr 360px;
       gap:18px;
       align-items:start;
+      position:relative;
     }
     .section.right{grid-template-columns:360px 1fr}
+    @media (max-width:980px){
+      .section{grid-template-columns:1fr}
+      .section.right{grid-template-columns:1fr}
+    }
+
+    /* Panels */
     .panel{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border-radius:12px;padding:18px;border:1px solid rgba(255,127,191,0.02);
       box-shadow:0 16px 40px rgba(0,0,0,0.55);
+      transition:transform .6s cubic-bezier(.2,.9,.2,1), box-shadow .45s, opacity .45s;
+      transform-origin:center center;
+      will-change:transform,opacity;
     }
+
     .panel h2{margin:0 0 8px;color:#fff;font-size:1.08rem}
     .panel p{margin:0;color:var(--muted);line-height:1.5}
 
+    /* sliding & zoom helpers */
+    .slide-left{transform:translateX(-36px) scale(.98);opacity:.88}
+    .slide-right{transform:translateX(36px) scale(.98);opacity:.88}
+    .in-view{transform:translateX(0) scale(1);opacity:1;box-shadow:0 30px 70px rgba(0,0,0,0.6)}
+
+    /* About list */
     .about-grid{display:grid;gap:10px;margin-top:12px}
     .about-item{display:flex;justify-content:space-between;padding:10px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,127,191,0.02);color:var(--muted)}
 
+    /* Projects compact */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:12px}
-    .project-card{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,127,191,0.02)}
-    .project-title{display:flex;justify-content:space-between;align-items:center;width:100%}
-    .project-title h3{margin:0;color:#fff;font-size:1rem}
-    .project-desc{margin-top:8px;color:var(--muted);font-size:0.95rem}
+    .project-card{
+      display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,127,191,0.02);transition:transform .45s, box-shadow .45s;cursor:default;
+    }
+    .project-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 30px 70px rgba(0,0,0,0.6)}
+    .project-thumb{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,127,191,0.04)}
+    .project-title{display:flex;align-items:center;justify-content:space-between;width:100%}
+    .project-title h3{margin:0;color:#fff;font-size:1rem;display:flex;align-items:center;gap:10px}
+    .project-desc{margin:6px 0 0;color:var(--muted);font-size:0.95rem}
+    .project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{background:rgba(255,255,255,0.01);padding:6px 8px;border-radius:8px;font-size:0.82rem;color:var(--muted)}
 
+    /* Timeline */
     .timeline{position:relative;padding-left:14px}
     .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--rose-mid),var(--rose-accent));border-radius:3px}
     .timeline-item{position:relative;margin:18px 0 18px 16px}
     .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--rose-accent)}
-    .company{font-weight:600;color:var(--muted);margin-bottom:6px}
     .role{font-weight:700;color:#fff}
+    .company{font-weight:600;color:var(--muted);margin-bottom:6px}
+    .exp-list{margin:8px 0 0 16px;color:var(--muted)}
 
-    /* contact section layout */
+    /* Certifications */
+    .cert-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+    .cert{width:160px;text-align:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,127,191,0.02)}
+    .cert img{width:88px;height:auto;display:block;margin:0 auto 8px}
+    .cert p{margin:6px 0 0;font-weight:700;color:#fff}
+
+    /* Contact */
     .contact-grid{display:grid;grid-template-columns:140px 1fr;gap:8px 18px;align-items:center}
     .contact-grid .label{color:#fff;font-weight:700}
     .contact-grid .value{color:var(--muted);word-break:break-word}
 
-    /* form styles */
     .contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted);margin-bottom:8px}
     .contact-form .row{display:flex;gap:8px}
     .contact-form .row > *{flex:1}
@@ -122,21 +156,16 @@
     .modal h3{margin:0 0 8px;color:var(--rose-accent)}
     .modal .close{background:transparent;border:0;color:var(--muted);font-size:1rem;cursor:pointer}
 
-    /* responsive */
     @media (max-width:980px){
-      .section,.section.right{grid-template-columns:1fr}
       .projects-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+      .page{padding:16px}
       .single-line-contact{justify-content:flex-start}
     }
 
     @media (max-width:520px){
       .name{font-size:1.5rem}
-      .contact-grid{grid-template-columns:1fr;gap:6px}
+      .project-thumb{width:56px;height:56px}
     }
-
-    /* small utilities */
-    .muted{color:var(--muted)}
-    .tag{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;color:var(--muted);font-size:0.82rem}
   </style>
 </head>
 <body>
@@ -147,7 +176,6 @@
         <div class="subtitle">Python Developer | Machine Learning Engineer | AI Engineer | Data Scientist | LLM & RAG Specialist | Automation & DevOps</div>
 
         <div class="cta-row">
-          <!-- Get in Touch opens modal contact form (mobile-friendly) -->
           <button class="btn" id="getInTouchBtn">Get in Touch</button>
         </div>
 
@@ -171,11 +199,13 @@
     </header>
 
     <main class="sections" id="main">
-      <!-- SUMMARY -->
-      <section class="section left">
+      <!-- SUMMARY (left) -->
+      <section class="section left slide-left">
         <div class="panel content">
           <h2>SUMMARY</h2>
           <p>Versatile technology professional with expertise in Python development, machine learning, and applied AI systems. Skilled in building LLM-powered chatbots, RAG pipelines, and AI agent frameworks, with strong experience in automation, API development, and DevOps integration (CI/CD, Jenkins, ServiceNow, Splunk). Certified across AWS, Azure, and GCP, with proven ability to design, deploy, and optimize intelligent, production-grade solutions.</p>
+
+          <div style="height:12px"></div>
 
           <div class="about-grid">
             <div class="about-item"><span>Name</span><strong>Loorthu Kanishta D</strong></div>
@@ -186,45 +216,61 @@
           </div>
         </div>
 
-        <aside class="panel side">
-          <strong style="color:#fff">Core strengths</strong>
+        <aside class="panel side slide-right">
+          <strong>Core strengths</strong>
           <div class="muted" style="margin-top:8px">Python development, LLMs & RAG, automation, CI/CD, observability</div>
         </aside>
       </section>
 
-      <!-- PROJECTS -->
-      <section class="section right" id="projects">
-        <aside class="panel side">
-          <strong style="color:#fff">Project focus</strong>
-          <div class="muted" style="margin-top:8px">Automation · Chatbot · Audio ML · 25+ office projects</div>
+      <!-- PROJECTS (right) -->
+      <section class="section right slide-right" id="projects">
+        <aside class="panel side slide-left">
+          <strong>Project focus</strong>
+          <div class="muted" style="margin-top:8px">Automation · Chatbot · Audio ML</div>
+          <div class="muted" style="margin-top:6px">25+ office projects (summary available on request)</div>
         </aside>
 
-        <div class="panel content">
-          <h2>SELECTED PROJECTS</h2>
-          <p class="muted">Representative work showing end-to-end delivery, production readiness, and measurable impact.</p>
+        <div class="panel content slide-right">
+          <h2>PROJECTS</h2>
+          <p>Representative work showing end-to-end delivery, production readiness, and measurable impact.</p>
 
-          <div class="projects-grid" aria-live="polite">
-            <article class="project-card" aria-labelledby="p1">
+          <div class="projects-grid" style="margin-top:12px;">
+            <!-- Bird Sound -->
+            <article class="project-card slide-left">
+              <img class="project-thumb" src="images/bird_waveform.png" alt="Bird waveform" />
               <div style="flex:1">
-                <div class="project-title"><h3 id="p1">AI-Based Bird Sound Analysis System</h3><span class="muted">Audio ML</span></div>
+                <div class="project-title">
+                  <h3><img src="images/tech_avatar.png" alt="icon" style="width:28px;height:28px;border-radius:6px;object-fit:cover"> AI-Based Bird Sound Analysis System</h3>
+                  <span class="muted">Audio ML</span>
+                </div>
                 <div class="project-desc">Built Python ML pipeline using MFCC + LSTM for species classification; deployed with a Bootstrap interface for biodiversity monitoring and serverless inference for batch processing.</div>
-                <div style="margin-top:8px"><span class="tag">Python</span> <span class="tag">Librosa</span> <span class="tag">PyTorch</span> <span class="tag">AWS Lambda</span></div>
+                <div class="project-tags"><span class="tag">Python</span><span class="tag">Librosa</span><span class="tag">PyTorch</span><span class="tag">AWS Lambda</span></div>
               </div>
             </article>
 
-            <article class="project-card" aria-labelledby="p2">
+            <!-- LLM Chatbot -->
+            <article class="project-card slide-left">
+              <img class="project-thumb" src="images/project_chatbot_thumb.png" alt="LLM chatbot" />
               <div style="flex:1">
-                <div class="project-title"><h3 id="p2">LLM-Powered Chatbot</h3><span class="muted">RAG · Conversational AI</span></div>
+                <div class="project-title">
+                  <h3><img src="images/tech_avatar.png" alt="icon" style="width:28px;height:28px;border-radius:6px;object-fit:cover"> LLM-Powered Chatbot</h3>
+                  <span class="muted">RAG · Conversational AI</span>
+                </div>
                 <div class="project-desc">Developed RAG pipelines and agent-based automation for enterprise conversational use cases; implemented prompt templates, safety filters, and Slack/ticketing integrations for automated triage.</div>
-                <div style="margin-top:8px"><span class="tag">Hugging Face</span> <span class="tag">FAISS</span> <span class="tag">FastAPI</span></div>
+                <div class="project-tags"><span class="tag">Hugging Face</span><span class="tag">FAISS</span><span class="tag">FastAPI</span><span class="tag">Docker</span></div>
               </div>
             </article>
 
-            <article class="project-card" aria-labelledby="p3">
+            <!-- Automation -->
+            <article class="project-card slide-left">
+              <img class="project-thumb" src="images/project_wealth_thumb.png" alt="Automation project" />
               <div style="flex:1">
-                <div class="project-title"><h3 id="p3">TCS Automation — Incident Linking</h3><span class="muted">Runbook Automation</span></div>
+                <div class="project-title">
+                  <h3><img src="images/tech_avatar.png" alt="icon" style="width:28px;height:28px;border-radius:6px;object-fit:cover"> TCS Automation — Incident Linking</h3>
+                  <span class="muted">Runbook Automation</span>
+                </div>
                 <div class="project-desc">Converted manual runbook tasks into Python APIs and automation scripts; integrated with ServiceNow, Jenkins, and Splunk to automatically link related incidents and reduce manual effort.</div>
-                <div style="margin-top:8px"><span class="tag">Django</span> <span class="tag">ServiceNow</span> <span class="tag">Splunk</span></div>
+                <div class="project-tags"><span class="tag">Django</span><span class="tag">ServiceNow</span><span class="tag">Splunk</span><span class="tag">Jenkins</span></div>
               </div>
             </article>
           </div>
@@ -232,47 +278,95 @@
       </section>
 
       <!-- WORK EXPERIENCE (detailed) -->
-      <section class="section left" id="experience">
-        <div class="panel content">
+      <section class="section left slide-left" id="experience">
+        <div class="panel content slide-left">
           <h2>WORK EXPERIENCE</h2>
-          <p class="muted"><strong>Tata Consultancy Services (TCS)</strong><br>Python Developer | Automation Engineer | Application Tool Programmer — June 2024</p>
-          <ul class="muted" style="margin:12px 0 0 18px">
-            <li>Developed Python automation scripts integrating ServiceNow, Splunk, Jenkins, and Git to streamline enterprise workflows.</li>
-            <li>Designed and deployed RESTful APIs with Django for data exchange and ML workflow orchestration.</li>
-            <li>Built and maintained CI/CD pipelines ensuring automated testing and reliable deployment.</li>
-            <li>Applied LLM models, RAG pipelines, and AI agents to create intelligent chatbot applications.</li>
-            <li>Recognized with Certificate of Appreciation and Xcelerate Warrior Award for technical excellence.</li>
-          </ul>
+
+          <div style="display:flex;gap:12px;align-items:center;margin-top:8px">
+            <img src="images/tech_avatar.png" alt="TCS logo" style="width:56px;height:56px;border-radius:8px;object-fit:contain;border:1px solid rgba(255,127,191,0.04)" />
+            <div>
+              <div style="font-weight:700;color:#fff">Tata Consultancy Services</div>
+              <div class="muted">Full-time · 2 yrs 1 mo</div>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="company">AI Software Engineer</div>
+              <div class="role">Feb 2026 - Present · 5 mos</div>
+              <div class="exp-list">
+                <ul>
+                  <li>Designing and developing chatbot applications using Python and large language models.</li>
+                  <li>Implementing RAG pipelines and agentic frameworks for intelligent automation.</li>
+                  <li>Building adaptive AI agents capable of handling complex, multi‑step tasks.</li>
+                  <li>Integrating conversational AI into enterprise workflows for scalable, production‑grade solutions.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="company">Automation Tool Programmer</div>
+              <div class="role">Jan 2025 - Feb 2026 · 1 yr 2 mos</div>
+              <div class="exp-list">
+                <ul>
+                  <li>Automated incident linking by converting manual runbook tasks into Python APIs.</li>
+                  <li>Streamlined workflows across enterprise platforms, reducing repetitive effort.</li>
+                  <li>Developed scalable automation scripts ensuring faster and more accurate resolution.</li>
+                  <li>Integrated APIs with ServiceNow and Jenkins to enhance operational efficiency.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="company">Python Developer</div>
+              <div class="role">Jun 2024 - Jan 2025 · 8 mos (On-site, Chennai)</div>
+              <div class="exp-list">
+                <ul>
+                  <li>Experienced in building automation scripts and backend solutions to streamline enterprise operations.</li>
+                  <li>Skilled in API development (Django, REST) and integrating systems across platforms like ServiceNow, Jenkins, and Splunk.</li>
+                  <li>Proficient in CI/CD pipelines, DevOps practices, and workflow automation for reliable deployments.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <aside class="panel side">
-          <strong style="color:#fff">Roles</strong>
+        <aside class="panel side slide-right">
+          <strong>Roles</strong>
           <div class="muted" style="margin-top:8px">AI Software Engineer; Automation Tool Programmer; Python Developer</div>
         </aside>
       </section>
 
       <!-- SKILLS -->
-      <section class="section right">
-        <aside class="panel side">
-          <strong style="color:#fff">Tools & Frameworks</strong>
+      <section class="section right slide-right">
+        <aside class="panel side slide-left">
+          <strong>Tools & Frameworks</strong>
           <div class="muted" style="margin-top:8px">Python · PyTorch · TensorFlow · Hugging Face · SageMaker · Docker · Kubernetes</div>
         </aside>
 
-        <div class="panel content">
+        <div class="panel content slide-right">
           <h2>SKILLS</h2>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+          <p>Practical, production-focused skills across ML, backend engineering, and cloud infrastructure.</p>
+
+          <div style="height:12px"></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
             <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
               <strong style="color:#fff">Core</strong>
               <div class="muted" style="margin-top:8px">Python, SQL, Django, REST APIs</div>
             </div>
+
             <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
               <strong style="color:#fff">ML & AI</strong>
               <div class="muted" style="margin-top:8px">Machine Learning, Deep Learning, LLMs, RAG, AI Agents</div>
             </div>
+
             <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
-              <strong style="color:#fff">DevOps</strong>
-              <div class="muted" style="margin-top:8px">CI/CD, Jenkins, Git, ServiceNow, Splunk</div>
+              <strong style="color:#fff">DevOps & Tools</strong>
+              <div class="muted" style="margin-top:8px">CI/CD, Jenkins, Git, ServiceNow, Splunk, Docker, Kubernetes</div>
             </div>
+
             <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
               <strong style="color:#fff">Cloud</strong>
               <div class="muted" style="margin-top:8px">AWS, Azure, GCP</div>
@@ -282,26 +376,48 @@
       </section>
 
       <!-- CERTIFICATIONS -->
-      <section class="section left">
-        <div class="panel content">
+      <section class="section left slide-left">
+        <div class="panel content slide-left">
           <h2>CERTIFICATIONS</h2>
-          <div class="muted" style="margin-top:8px">AWS Certified Machine Learning — Specialty; AWS Certified Machine Learning — Associate; Microsoft Certified: Azure AI Engineer Associate (AI-102); Google Cloud Professional Cloud Developer</div>
+          <p class="muted">Cloud and AI badges (images shown).</p>
+
+          <div class="cert-grid">
+            <div class="cert">
+              <img src="images/aws_ml_specialty.png" alt="AWS ML Specialty" />
+              <p>AWS Certified Machine Learning — Specialty</p>
+            </div>
+
+            <div class="cert">
+              <img src="images/aws_ml_associate.png" alt="AWS ML Associate" />
+              <p>AWS Certified Machine Learning — Associate</p>
+            </div>
+
+            <div class="cert">
+              <img src="images/azure_ai_engineer.png" alt="Azure AI Engineer" />
+              <p>Microsoft Certified: Azure AI Engineer Associate (AI-102)</p>
+            </div>
+
+            <div class="cert">
+              <img src="images/gcp_cloud_developer.png" alt="GCP Cloud Developer" />
+              <p>Google Cloud Professional Cloud Developer</p>
+            </div>
+          </div>
         </div>
 
-        <aside class="panel side">
-          <strong style="color:#fff">Badges</strong>
+        <aside class="panel side slide-right">
+          <strong>Badges</strong>
           <div class="muted" style="margin-top:8px">AWS · Azure · GCP</div>
         </aside>
       </section>
 
-      <!-- CONTACT (neat aligned list + form) -->
-      <section class="section right" id="contact">
-        <aside class="panel side">
-          <strong style="color:#fff">Reach out</strong>
+      <!-- CONTACT -->
+      <section class="section right slide-right" id="contact">
+        <aside class="panel side slide-left">
+          <strong>Reach out</strong>
           <div class="muted" style="margin-top:8px">Available for daytime, full-time roles. Share a brief about your project and I'll respond promptly.</div>
         </aside>
 
-        <div class="panel content">
+        <div class="panel content slide-right">
           <h2>CONTACT</h2>
           <p class="muted">Neatly aligned contact details for quick copy or click.</p>
 
@@ -322,8 +438,8 @@
 
           <div style="height:14px"></div>
 
-          <!-- Inline contact form (also used by modal) -->
-          <form id="inlineContactForm" class="contact-form" onsubmit="handleFormSubmit(event)" aria-label="Contact form">
+          <!-- Inline contact form -->
+          <form id="inlineContactForm" class="contact-form" onsubmit="handleInlineSubmit(event)" aria-label="Contact form">
             <input type="text" id="visitorNameInline" placeholder="Your Name" required />
             <input type="email" id="visitorEmailInline" placeholder="Your Email" required />
             <input type="text" id="visitorSubjectInline" placeholder="Subject (brief)" />
@@ -376,10 +492,27 @@
   </div>
 
   <script>
-    // Set year
+    // set year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Modal controls
+    // IntersectionObserver to add sliding/zoom in-view classes
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const el = entry.target;
+        if(entry.isIntersecting){
+          el.classList.add('in-view');
+        } else {
+          el.classList.remove('in-view');
+        }
+      });
+    }, {threshold:0.28});
+
+    // Observe panels, project cards and sections
+    document.querySelectorAll('.panel, .project-card, .section').forEach(el=>{
+      observer.observe(el);
+    });
+
+    // Get in Touch opens modal
     const modalBackdrop = document.getElementById('modalBackdrop');
     const getInTouchBtn = document.getElementById('getInTouchBtn');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
@@ -393,7 +526,6 @@
     function closeModal() {
       modalBackdrop.style.display = 'none';
       modalBackdrop.setAttribute('aria-hidden', 'true');
-      // hide fallback if visible
       const fallback = document.getElementById('mailtoFallback');
       if (fallback) fallback.style.display = 'none';
     }
@@ -432,17 +564,13 @@
 
       const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      // Try to open mail client
       try {
-        // Use location.href to trigger mail client
         window.location.href = mailto;
-        // Close modal after a short delay
         setTimeout(() => {
           closeModal();
           alert('Your email client should be open with a prefilled message. Please review and send to complete the message.');
         }, 400);
       } catch (err) {
-        // Fallback: show mailto link for copy
         const fallback = document.getElementById('mailtoFallback');
         const mailtoInput = document.getElementById('mailtoLink');
         if (fallback && mailtoInput) {
@@ -455,8 +583,8 @@
       }
     }
 
-    // Inline contact form handler (same behavior as modal)
-    function handleFormSubmit(e) {
+    // Inline contact form handler (same behavior)
+    function handleInlineSubmit(e) {
       e.preventDefault();
       const to = 'dloorthukanishta@gmail.com';
       const name = document.getElementById('visitorNameInline').value.trim();
@@ -498,7 +626,7 @@
     }
 
     // Attach inline form submit handler
-    document.getElementById('inlineContactForm').addEventListener('submit', handleFormSubmit);
+    document.getElementById('inlineContactForm').addEventListener('submit', handleInlineSubmit);
 
     // Accessibility: close modal with Escape
     document.addEventListener('keydown', (e) => {
