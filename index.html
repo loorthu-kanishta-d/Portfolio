@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Loorthu Kanishta D — Portfolio & Resume</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font: Montserrat for a clean modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -20,13 +20,14 @@
       --card-radius:14px;
       --max-width:1100px;
       --accent-text:#fff1f8;
+      --box-black: rgba(6,4,10,0.75);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
       background:linear-gradient(180deg,var(--bg-1), #0b0710 100%);
       color:var(--muted);
       -webkit-font-smoothing:antialiased;
@@ -39,7 +40,7 @@
     /* decorative rose/purple glows */
     .glow-top{
       position:fixed;left:-12%;top:-14%;width:62vw;height:42vh;z-index:-3;
-      background:radial-gradient(closest-side, rgba(123,46,110,0.14), transparent 36%);
+      background:radial-gradient(closest-side, rgba(123,46,110,0.16), transparent 36%);
       transform:rotate(-14deg);pointer-events:none;
     }
     .glow-bottom{
@@ -51,9 +52,10 @@
     /* Header */
     header{
       padding:26px;border-radius:var(--card-radius);margin-bottom:18px;
-      background:linear-gradient(180deg, rgba(123,46,110,0.04), rgba(20,8,18,0.02));
+      background:linear-gradient(180deg, rgba(123,46,110,0.05), rgba(20,8,18,0.02));
       border:1px solid rgba(255,127,191,0.04);
       box-shadow:0 22px 60px rgba(0,0,0,0.6);
+      position:relative;
     }
     .header-grid{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
     .title-block{min-width:0;flex:1}
@@ -67,8 +69,18 @@
     }
 
     .stats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-    .stat{background:var(--panel);padding:10px 14px;border-radius:12px;border:1px solid rgba(255,127,191,0.03);min-width:120px;text-align:center}
+    .stat{background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45));padding:10px 14px;border-radius:12px;border:1px solid rgba(255,127,191,0.03);min-width:120px;text-align:center}
     .stat strong{display:block;color:#fff;font-size:1.12rem}
+
+    /* compact contact box near name (new placement) */
+    .contact-box{
+      position:absolute;right:22px;top:22px;width:300px;border-radius:12px;padding:12px;background:linear-gradient(180deg,var(--box-black), rgba(20,8,18,0.6));
+      border:1px solid rgba(255,127,191,0.06);box-shadow:0 18px 40px rgba(0,0,0,0.6);
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .contact-box .row{display:flex;gap:12px;align-items:center}
+    .contact-box .label{width:90px;color:var(--rose-accent);font-weight:700}
+    .contact-box .value{color:var(--muted);font-size:0.95rem;word-break:break-word}
 
     /* Sections container */
     .sections{display:flex;flex-direction:column;gap:28px;margin-top:18px}
@@ -85,6 +97,7 @@
     @media (max-width:980px){
       .section{grid-template-columns:1fr}
       .section.right{grid-template-columns:1fr}
+      .contact-box{position:static;width:100%;order:2}
     }
 
     /* Panels */
@@ -139,15 +152,10 @@
     .cert img{width:88px;height:auto;display:block;margin:0 auto 8px}
     .cert p{margin:6px 0 0;font-weight:700;color:#fff}
 
-    /* Contact */
+    /* Contact form */
     .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
     .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted)}
     .contact-form button{display:inline-block;margin-top:8px;background:linear-gradient(90deg,var(--rose-mid),var(--rose-accent));color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700}
-
-    /* neat contact list */
-    .contact-list{display:grid;grid-template-columns:140px 1fr;gap:8px 18px;align-items:center}
-    .contact-list .label{color:#fff;font-weight:700}
-    .contact-list .value{color:var(--muted);word-break:break-word}
 
     /* sliding & zoom helpers */
     .slide-left{transform:translateX(-36px) scale(.98);opacity:.88}
@@ -157,13 +165,13 @@
     @media (max-width:980px){
       .projects-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
       .page{padding:16px}
-      .contact-list{grid-template-columns:120px 1fr}
     }
 
     /* small utility */
     a { color: var(--rose-accent); text-decoration: none; }
     .muted { color: var(--muted); }
     .accent-text { color: var(--accent-text); }
+    .label { font-weight:600;color:#fff;font-size:0.95rem }
   </style>
 </head>
 <body>
@@ -186,13 +194,14 @@
             <div class="stat"><strong>25+</strong><span class="muted">Projects Delivered (office)</span></div>
             <div class="stat"><strong>4</strong><span class="muted">Certifications</span></div>
           </div>
+        </div>
 
-          <div style="margin-top:12px;color:var(--muted);font-size:0.92rem">
-            <div><strong style="color:#fff">Email</strong> — dloorthukanishta@gmail.com</div>
-            <div><strong style="color:#fff">Location</strong> — Chennai, India</div>
-            <div style="margin-top:6px"><strong style="color:#fff">LinkedIn</strong> — <a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
-            <div><strong style="color:#fff">GitHub</strong> — <a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
-          </div>
+        <!-- Compact contact box placed near the name (removed contact lines from header body) -->
+        <div class="contact-box" aria-label="Primary contact details">
+          <div class="row"><div class="label">Email</div><div class="value">dloorthukanishta@gmail.com</div></div>
+          <div class="row"><div class="label">Location</div><div class="value">Chennai, India</div></div>
+          <div class="row"><div class="label">LinkedIn</div><div class="value"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div></div>
+          <div class="row"><div class="label">GitHub</div><div class="value"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div></div>
         </div>
       </div>
     </header>
@@ -429,7 +438,7 @@
         </aside>
       </section>
 
-      <!-- CONTACT -->
+      <!-- CONTACT (form + repeat neat list) -->
       <section class="section right slide-right" id="contact">
         <aside class="panel side slide-left">
           <strong>Reach out</strong>
@@ -443,22 +452,20 @@
 
           <div style="height:12px"></div>
 
-          <!-- Neat aligned contact block -->
-          <div class="contact-list" aria-label="Contact details">
-            <div class="label">Email</div>
-            <div class="value">dloorthukanishta@gmail.com</div>
+          <!-- Neat aligned contact block (repeat for visibility) -->
+          <div style="margin-bottom:12px;display:grid;grid-template-columns:140px 1fr;gap:8px 18px;align-items:center">
+            <div style="color:#fff;font-weight:700">Email</div>
+            <div style="color:var(--muted)">dloorthukanishta@gmail.com</div>
 
-            <div class="label">Location</div>
-            <div class="value">Chennai, India</div>
+            <div style="color:#fff;font-weight:700">Location</div>
+            <div style="color:var(--muted)">Chennai, India</div>
 
-            <div class="label">LinkedIn</div>
-            <div class="value"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
+            <div style="color:#fff;font-weight:700">LinkedIn</div>
+            <div style="color:var(--muted)"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
 
-            <div class="label">GitHub</div>
-            <div class="value"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
+            <div style="color:#fff;font-weight:700">GitHub</div>
+            <div style="color:var(--muted)"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
           </div>
-
-          <div style="height:14px"></div>
 
           <form class="contact-form" onsubmit="handleContact(event)">
             <input type="text" id="name" placeholder="Your Name" required />
