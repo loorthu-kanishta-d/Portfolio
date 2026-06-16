@@ -10,13 +10,12 @@
 
   <style>
     :root{
-      --accent-a:#2dd4bf;   /* teal */
-      --accent-b:#7c3aed;   /* violet */
-      --bg:#071428;         /* deep navy */
-      --card:#071428;       /* card dark */
-      --muted:#9aa6b2;
-      --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
+      --accent-1: #6b8e8f;   /* soft teal */
+      --accent-2: #7b6fa6;   /* muted violet */
+      --bg: #f6f7f9;         /* calm off-white */
+      --card: #ffffff;
+      --muted: #6b7280;
+      --glass: rgba(107,142,143,0.06);
     }
 
     *{box-sizing:border-box}
@@ -24,181 +23,117 @@
     body{
       margin:0;
       font-family: "Inter", "Source Code Pro", monospace, system-ui, -apple-system;
-      background:linear-gradient(180deg,#071428 0%, #071a2a 100%);
-      color:#e6eef9;
+      background:var(--bg);
+      color:#0f1724;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       scroll-behavior:smooth;
     }
 
-    /* Header / Hero */
+    /* Header */
     header{
-      padding:64px 20px;
-      text-align:left;
-      background:
-        radial-gradient(800px 300px at 10% 10%, rgba(124,58,237,0.06), transparent 10%),
-        radial-gradient(700px 260px at 90% 80%, rgba(45,212,191,0.05), transparent 12%),
-        linear-gradient(180deg,#071428 0%, #071a2a 100%);
-      color:var(--accent-a);
-      position:relative;
-      overflow:hidden;
+      padding:56px 20px;
+      background:linear-gradient(180deg, rgba(123,111,166,0.06), rgba(107,142,143,0.03));
+      color:var(--accent-1);
     }
-    header .hero{
-      max-width:1200px;
-      margin:0 auto;
-      display:flex;
-      gap:28px;
-      align-items:center;
-      justify-content:space-between;
-    }
+    .hero{max-width:1100px;margin:0 auto;display:flex;gap:24px;align-items:center;justify-content:space-between}
     .hero-left{max-width:720px}
-    header h1{font-size:2.4rem; margin:0 0 6px; color:#e6fff6; letter-spacing:0.4px}
-    header p{margin:0 0 14px; color:var(--muted); font-size:1.05rem}
-    .hero-cta{display:flex; gap:12px; align-items:center}
+    header h1{font-size:2.1rem;margin:0 0 6px;color:#0f1724}
+    header p{margin:0 0 12px;color:var(--muted);font-size:1.02rem}
+    .hero-cta{display:flex;gap:12px;align-items:center}
     .btn{
-      background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
-      color:#071428; border:0; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer;
-      box-shadow:0 8px 30px rgba(124,58,237,0.12);
-      text-decoration:none;
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;
+      box-shadow:0 8px 20px rgba(107,142,143,0.08);
     }
-    .btn.secondary{
-      background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted);
-      box-shadow:none;
-    }
+    .btn.secondary{background:transparent;border:1px solid rgba(15,23,36,0.06);color:var(--muted);box-shadow:none}
 
-    /* floating tech icons */
-    .float-icons{position:absolute; inset:0; pointer-events:none}
-    .float-icons i{
-      position:absolute; width:48px; height:48px; opacity:0.08; filter:blur(0.6px);
-      animation:float 8s ease-in-out infinite;
-    }
-    .float-icons i:nth-child(1){left:6%; top:10%; transform:rotate(12deg)}
-    .float-icons i:nth-child(2){right:8%; top:18%; transform:rotate(-8deg); animation-duration:10s}
-    .float-icons i:nth-child(3){left:20%; bottom:6%; transform:rotate(6deg); animation-duration:9s}
-    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-18px)}100%{transform:translateY(0)}}
-
-    /* Main layout */
-    main{max-width:1100px; margin:28px auto; padding:0 20px 80px}
-    section{margin:48px 0; position:relative}
+    main{max-width:1100px;margin:28px auto;padding:0 20px 80px}
+    section{margin:44px 0;position:relative}
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;
-      padding:26px;
-      box-shadow:0 12px 40px rgba(2,6,23,0.6);
-      transition:transform .45s, box-shadow .45s;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.03);
+      background:var(--card);
+      border-radius:12px;padding:22px;box-shadow:0 8px 30px rgba(15,23,36,0.04);
+      transition:transform .35s, box-shadow .35s;overflow:hidden;border:1px solid rgba(15,23,36,0.03);
     }
-    .card:hover{transform:translateY(-8px); box-shadow:0 28px 60px rgba(2,6,23,0.7)}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(15,23,36,0.06)}
 
-    h2{font-size:1.25rem; margin-bottom:12px; color: #e6fff6}
-    p{line-height:1.6; color:var(--muted)}
+    h2{font-size:1.15rem;margin-bottom:10px;color:#0f1724}
+    p{line-height:1.6;color:var(--muted)}
 
-    /* Overlap effect: sections slightly overlap previous */
-    section + section { margin-top:-40px }
-
-    /* About split layout */
-    .about-grid{display:grid; grid-template-columns:1fr 380px; gap:22px; align-items:center}
+    /* About layout */
+    .about-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center}
     .about-avatar{
-      height:360px; border-radius:12px; background:linear-gradient(135deg,var(--accent-b),#2dd4bf);
-      display:flex; align-items:center; justify-content:center; color:#071428; font-weight:800; font-size:1.05rem;
-      box-shadow:0 18px 50px rgba(124,58,237,0.12);
-      position:relative; overflow:hidden;
+      height:320px;border-radius:12px;background:linear-gradient(135deg,#eaf6f4,#f0eaf8);
+      display:flex;align-items:center;justify-content:center;color:#0f1724;font-weight:700;font-size:1.05rem;
+      box-shadow:0 10px 30px rgba(15,23,36,0.04);overflow:hidden;
     }
-    .about-avatar .badge{
-      position:absolute; right:12px; top:12px; background:rgba(255,255,255,0.06); padding:6px 10px; border-radius:8px; color:#e6fff6; font-weight:700; font-size:0.85rem;
-    }
-    .about-list{display:grid; gap:10px; margin-top:12px}
-    .about-list div{display:flex; justify-content:space-between; padding:10px 12px; border-radius:10px; background:var(--glass-2); color:var(--muted)}
+    .about-list{display:grid;gap:10px;margin-top:12px}
+    .about-list div{display:flex;justify-content:space-between;padding:10px 12px;border-radius:10px;background:var(--glass);color:var(--muted)}
 
-    /* Animated counters */
-    .counters{display:flex; gap:18px; margin-top:18px; flex-wrap:wrap}
-    .counter{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:12px 16px; border-radius:10px; min-width:140px; text-align:center}
-    .counter strong{display:block; font-size:1.4rem; color:#e6fff6}
+    .counters{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+    .counter{background:linear-gradient(90deg, rgba(107,142,143,0.03), rgba(123,111,166,0.02));padding:10px 14px;border-radius:10px;min-width:120px;text-align:center}
+    .counter strong{display:block;font-size:1.25rem;color:#0f1724}
 
     /* Skills */
-    .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px}
-    .skill{
-      padding:14px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); text-align:left;
-      box-shadow:0 8px 24px rgba(2,6,23,0.45)
-    }
-    .skill strong{display:block; margin-bottom:8px; color:#e6fff6}
-    .progress{height:10px; background:rgba(255,255,255,0.03); border-radius:999px; overflow:hidden}
-    .progress > i{display:block; height:100%; background:linear-gradient(90deg,var(--accent-a),var(--accent-b)); width:0%; transition:width 1.2s ease}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+    .skill{padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfbfd);text-align:left;border:1px solid rgba(15,23,36,0.03)}
+    .skill strong{display:block;margin-bottom:8px;color:#0f1724}
+    .progress{height:10px;background:#eef3f4;border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));width:0%;transition:width 1.2s ease}
 
     /* Services */
-    .services-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px}
-    .service{padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); text-align:left}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .service{padding:14px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
 
     /* Projects */
-    .projects-stack{display:grid; gap:14px}
-    .project{
-      display:flex; gap:14px; align-items:flex-start;
-      padding:16px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-      box-shadow:0 12px 36px rgba(2,6,23,0.45)
-    }
-    .project .meta{min-width:120px; font-weight:800; color:var(--accent-a)}
-
-    .tech-list{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
-    .tech{background:rgba(255,255,255,0.03); padding:6px 8px; border-radius:8px; font-size:0.85rem; color:var(--muted)}
+    .projects-stack{display:grid;gap:12px}
+    .project{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
+    .project .meta{min-width:110px;font-weight:800;color:var(--accent-1)}
+    .tech-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tech{background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.85rem;color:var(--muted)}
 
     /* Experience timeline */
-    .timeline{position:relative; padding-left:18px}
-    .timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--accent-a),var(--accent-b)); border-radius:3px}
-    .timeline-item{position:relative; margin:22px 0 22px 18px}
-    .timeline-item::before{content:""; position:absolute; left:-26px; top:6px; width:14px; height:14px; border-radius:50%; background:#071428; border:4px solid var(--accent-b)}
-
-    .role{font-weight:800; color:#e6fff6}
-    .company{font-weight:700; color:var(--muted); margin-bottom:6px}
-    .exp-list{margin:8px 0 0 18px; color:var(--muted)}
+    .timeline{position:relative;padding-left:16px}
+    .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));border-radius:3px}
+    .timeline-item{position:relative;margin:18px 0 18px 16px}
+    .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--accent-2)}
+    .role{font-weight:800;color:#0f1724}
+    .company{font-weight:700;color:var(--muted);margin-bottom:6px}
+    .exp-list{margin:8px 0 0 16px;color:var(--muted)}
 
     /* Certifications */
-    .cert-grid{display:flex; flex-wrap:wrap; gap:18px; justify-content:center}
-    .cert{
-      width:220px; text-align:center; padding:14px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-      box-shadow:0 12px 36px rgba(2,6,23,0.45)
-    }
-    .cert img{width:110px; height:auto; display:block; margin:0 auto 10px; animation:fadeIn .9s ease both}
-    .cert p{margin:6px 0 10px; font-weight:800; color:#e6fff6}
+    .cert-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+    .cert{width:200px;text-align:center;padding:12px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
+    .cert img{width:100px;height:auto;display:block;margin:0 auto 10px}
+    .cert p{margin:6px 0 10px;font-weight:700;color:#0f1724}
 
     /* Contact */
-    .contact-grid{display:grid; grid-template-columns:1fr 420px; gap:18px}
-    .contact-form input, .contact-form textarea{
-      width:100%; padding:12px; margin:8px 0; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:#e6eef9;
-    }
-    .contact-form button{display:inline-block; margin-top:8px}
+    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
+    .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(15,23,36,0.06);background:#fff;color:#0f1724}
+    .contact-form button{display:inline-block;margin-top:8px}
 
-    /* Footer */
-    footer{padding:22px 20px; text-align:center; color:var(--muted); background:transparent; margin-top:40px}
+    footer{padding:18px 20px;text-align:center;color:var(--muted);background:transparent;margin-top:30px}
 
     @media (max-width:980px){
-      .about-grid, .contact-grid{grid-template-columns:1fr}
-      header h1{font-size:1.8rem}
-      .about-avatar{height:260px}
-      .hero-left{max-width:100%}
-    }
-
-    @keyframes fadeIn {
-      from{opacity:0; transform:scale(.95)}
-      to{opacity:1; transform:scale(1)}
+      .about-grid,.contact-grid{grid-template-columns:1fr}
+      header h1{font-size:1.6rem}
+      .about-avatar{height:220px}
     }
   </style>
 </head>
 <body>
 
-  <!-- Header / Hero -->
-  <header data-aos="fade-down" data-aos-duration="900">
+  <header data-aos="fade-down" data-aos-duration="800">
     <div class="hero">
       <div class="hero-left">
         <h1>Loorthu Kanishta D</h1>
-        <p>AI Engineer · Python Developer · ML Engineer · Data Scientist — building production ML systems, LLM assistants, and automation that scale.</p>
+        <p>AI Engineer · Python Developer · ML Engineer · Data Scientist — building production ML systems and LLM assistants that scale.</p>
 
         <div class="hero-cta">
-          <a class="btn" href="main/images/Loorthu_Kanishta_Resume.pdf" download>Download Resume</a>
-          <a class="btn secondary" href="#contact">Get in Touch</a>
+          <a class="btn" href="#contact">Get in Touch</a>
         </div>
 
-        <div class="counters" style="margin-top:18px;">
+        <div class="counters" style="margin-top:14px;">
           <div class="counter" data-aos="fade-up" data-aos-delay="120">
             <strong id="counter-exp">3+</strong>
             <span style="color:var(--muted)">Years Experience</span>
@@ -215,43 +150,31 @@
       </div>
 
       <div class="about-avatar" data-aos="zoom-in" data-aos-delay="300">
-        <div>
-          <div style="font-size:1.2rem">Loorthu</div>
-          <div style="font-size:0.9rem; opacity:0.95; margin-top:8px">Python · ML · LLMs · Cloud</div>
-        </div>
-        <div class="badge">AI & ML</div>
+        <!-- Tech avatar image placeholder -->
+        <img src="main/images/tech_avatar.png" alt="Tech avatar illustration" style="width:88%;border-radius:8px;max-width:300px" />
       </div>
-    </div>
-
-    <!-- decorative floating icons (placeholders) -->
-    <div class="float-icons" aria-hidden="true">
-      <i style="background:radial-gradient(circle,var(--accent-b),var(--accent-a)); border-radius:8px;"></i>
-      <i style="background:radial-gradient(circle,var(--accent-a),var(--accent-b)); border-radius:8px;"></i>
-      <i style="background:radial-gradient(circle,var(--accent-b),var(--accent-a)); border-radius:8px;"></i>
     </div>
   </header>
 
   <main>
 
-    <!-- About -->
-    <section id="about" data-aos="fade-right" data-aos-duration="900">
+    <section id="about" data-aos="fade-right" data-aos-duration="800">
       <div class="card">
         <h2>About Me</h2>
-        <p>I design and ship production-grade AI systems and developer tools. My focus is on building robust ML pipelines, integrating LLMs into enterprise workflows, and automating repetitive operational tasks. I enjoy turning research ideas into reliable products and mentoring teams to adopt best practices in model deployment, observability, and cost-efficient cloud architectures.</p>
+        <p>I design and ship production-grade AI systems and developer tools. My focus is on building robust ML pipelines, integrating LLMs into enterprise workflows, and automating operational tasks. I enjoy turning research ideas into reliable products and helping teams adopt best practices for deployment and observability.</p>
 
-        <div style="height:14px"></div>
+        <div style="height:12px"></div>
 
         <div class="about-grid">
           <div>
             <p style="margin-bottom:8px"><strong>Summary</strong></p>
-            <p>I have hands-on experience across the ML lifecycle: data ingestion and feature engineering, model training and evaluation, model optimization and deployment, and monitoring in production. I combine backend engineering skills (APIs, microservices, CI/CD) with ML expertise to deliver end-to-end solutions.</p>
+            <p>Hands-on experience across the ML lifecycle: data ingestion and feature engineering, model training and evaluation, model optimization and deployment, and monitoring in production. I combine backend engineering (APIs, microservices, CI/CD) with ML expertise to deliver end-to-end solutions.</p>
 
             <div class="about-list" aria-hidden="false">
               <div><span>Name</span><strong>Loorthu Kanishta D</strong></div>
               <div><span>Experience</span><strong>3+ Years</strong></div>
               <div><span>Specialization</span><strong>AI Systems, Automation, Backend</strong></div>
               <div><span>Email</span><strong>dloorthukanishta@gmail.com</strong></div>
-              <div><span>Phone</span><strong>+91 9150108849</strong></div>
               <div><span>Location</span><strong>Tamil Nadu, India</strong></div>
             </div>
           </div>
@@ -263,14 +186,14 @@
                 <li>Production ML: SageMaker, model serving, A/B testing, drift detection</li>
                 <li>LLMs & RAG: Retrieval pipelines, vector stores, prompt engineering</li>
                 <li>Backend & APIs: Django, FastAPI, REST, serverless functions</li>
-                <li>DevOps: CI/CD, Docker, Kubernetes, Jenkins, GitOps</li>
+                <li>DevOps: CI/CD, Docker, Kubernetes, Jenkins</li>
                 <li>Monitoring: Prometheus, Grafana, logging, observability</li>
               </ul>
             </div>
 
             <div style="margin-top:8px">
               <p style="margin:0 0 6px"><strong>Tools & Frameworks</strong></p>
-              <div style="display:flex; gap:8px; flex-wrap:wrap">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <span class="tech">Python</span>
                 <span class="tech">PyTorch</span>
                 <span class="tech">TensorFlow</span>
@@ -286,8 +209,7 @@
       </div>
     </section>
 
-    <!-- Skills -->
-    <section id="skills" data-aos="zoom-in" data-aos-duration="900">
+    <section id="skills" data-aos="zoom-in" data-aos-duration="800">
       <div class="card">
         <h2>Skills</h2>
         <p>Practical, production-focused skills across ML, backend engineering, and cloud infrastructure.</p>
@@ -296,76 +218,44 @@
         <div class="skills-grid">
           <div class="skill" data-aos="fade-up" data-aos-delay="80">
             <strong>Python & Ecosystem</strong>
-            <p style="margin:6px 0 8px; color:var(--muted)">Scripting, libraries, packaging, async patterns, testing.</p>
+            <p style="margin:6px 0 8px;color:var(--muted)">Scripting, libraries, packaging, async patterns, testing.</p>
             <div class="progress"><i style="width:94%"></i></div>
           </div>
 
           <div class="skill" data-aos="fade-up" data-aos-delay="140">
             <strong>Machine Learning</strong>
-            <p style="margin:6px 0 8px; color:var(--muted)">Modeling, feature engineering, evaluation, hyperparameter tuning.</p>
+            <p style="margin:6px 0 8px;color:var(--muted)">Modeling, feature engineering, evaluation, hyperparameter tuning.</p>
             <div class="progress"><i style="width:88%"></i></div>
           </div>
 
           <div class="skill" data-aos="fade-up" data-aos-delay="200">
             <strong>Deep Learning</strong>
-            <p style="margin:6px 0 8px; color:var(--muted)">CNNs, RNNs, Transformers, fine-tuning LLMs.</p>
+            <p style="margin:6px 0 8px;color:var(--muted)">CNNs, RNNs, Transformers, fine-tuning LLMs.</p>
             <div class="progress"><i style="width:82%"></i></div>
           </div>
 
           <div class="skill" data-aos="fade-up" data-aos-delay="260">
             <strong>LLMs & RAG</strong>
-            <p style="margin:6px 0 8px; color:var(--muted)">Retrieval, vector stores, prompt design, chain-of-thought flows.</p>
+            <p style="margin:6px 0 8px;color:var(--muted)">Retrieval, vector stores, prompt design, chain-of-thought flows.</p>
             <div class="progress"><i style="width:86%"></i></div>
           </div>
 
           <div class="skill" data-aos="fade-up" data-aos-delay="320">
             <strong>Cloud & DevOps</strong>
-            <p style="margin:6px 0 8px; color:var(--muted)">AWS services, CI/CD, containerization, monitoring.</p>
+            <p style="margin:6px 0 8px;color:var(--muted)">AWS services, CI/CD, containerization, monitoring.</p>
             <div class="progress"><i style="width:84%"></i></div>
           </div>
 
           <div class="skill" data-aos="fade-up" data-aos-delay="380">
             <strong>APIs & Integration</strong>
-            <p style="margin:6px 0 8px; color:var(--muted)">Designing robust REST/GraphQL endpoints and integrations.</p>
+            <p style="margin:6px 0 8px;color:var(--muted)">Designing robust REST/GraphQL endpoints and integrations.</p>
             <div class="progress"><i style="width:88%"></i></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" data-aos="fade-up" data-aos-duration="900">
-      <div class="card">
-        <h2>Services</h2>
-        <p>I partner with teams to design, build, and operate ML-enabled products and automation solutions.</p>
-
-        <div style="height:12px"></div>
-        <div class="services-grid">
-          <div class="service" data-aos="fade-up" data-aos-delay="80">
-            <h3>LLM Integrations & Assistants</h3>
-            <p>Designing conversational agents, retrieval-augmented generation, and multi-turn orchestration for knowledge work automation.</p>
-          </div>
-
-          <div class="service" data-aos="fade-up" data-aos-delay="140">
-            <h3>Production ML Systems</h3>
-            <p>End-to-end pipelines: data ingestion, training, model registry, deployment, monitoring, and cost optimization.</p>
-          </div>
-
-          <div class="service" data-aos="fade-up" data-aos-delay="200">
-            <h3>Automation & Tooling</h3>
-            <p>Automating runbooks, incident linking, and repetitive tasks with Python APIs and integrations (ServiceNow, Jenkins).</p>
-          </div>
-
-          <div class="service" data-aos="fade-up" data-aos-delay="260">
-            <h3>API & Backend Engineering</h3>
-            <p>Building scalable REST/GraphQL services, serverless endpoints, and microservices with robust testing and CI/CD.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" data-aos="fade-left" data-aos-duration="900">
+    <section id="projects" data-aos="fade-left" data-aos-duration="800">
       <div class="card">
         <h2>Selected Projects</h2>
         <p>Representative work showing end-to-end delivery, production readiness, and measurable impact.</p>
@@ -382,7 +272,7 @@
                 <span class="tech">Python</span><span class="tech">Librosa</span><span class="tech">PyTorch</span><span class="tech">AWS Lambda</span>
               </div>
               <div style="margin-top:10px">
-                <img src="main/images/bird_waveform.png" alt="Bird sound waveform thumbnail" style="width:100%; border-radius:8px; max-width:520px" />
+                <img src="main/images/bird_waveform.png" alt="Bird sound waveform thumbnail" style="width:100%;border-radius:8px;max-width:520px" />
               </div>
             </div>
           </div>
@@ -396,7 +286,7 @@
                 <span class="tech">Hugging Face</span><span class="tech">FAISS</span><span class="tech">FastAPI</span><span class="tech">Docker</span>
               </div>
               <div style="margin-top:10px">
-                <img src="main/images/project_chatbot_thumb.png" alt="LLM chatbot project thumbnail" style="width:100%; border-radius:8px; max-width:520px" />
+                <img src="main/images/project_chatbot_thumb.png" alt="LLM chatbot project thumbnail" style="width:100%;border-radius:8px;max-width:520px" />
               </div>
             </div>
           </div>
@@ -421,7 +311,7 @@
                 <span class="tech">React Native</span><span class="tech">Expo</span><span class="tech">REST</span><span class="tech">SQLite</span>
               </div>
               <div style="margin-top:10px">
-                <img src="main/images/project_wealth_thumb.png" alt="Wealth management app thumbnail" style="width:100%; border-radius:8px; max-width:520px" />
+                <img src="main/images/project_wealth_thumb.png" alt="Wealth management app thumbnail" style="width:100%;border-radius:8px;max-width:520px" />
               </div>
             </div>
           </div>
@@ -430,8 +320,7 @@
       </div>
     </section>
 
-    <!-- Experience -->
-    <section id="experience" data-aos="fade-up" data-aos-duration="900">
+    <section id="experience" data-aos="fade-up" data-aos-duration="800">
       <div class="card">
         <h2>Experience</h2>
         <p>Detailed roles and accomplishments showing progression, impact, and technical ownership.</p>
@@ -482,61 +371,50 @@
       </div>
     </section>
 
-    <!-- Certifications -->
-    <section id="certifications" data-aos="zoom-in" data-aos-duration="900">
+    <section id="certifications" data-aos="zoom-in" data-aos-duration="800">
       <div class="card">
         <h2>Certifications</h2>
-        <p>Official cloud and AI certifications demonstrating practical, validated skills.</p>
+        <p>Cloud and AI badges (images only).</p>
 
         <div style="height:12px"></div>
         <div class="cert-grid">
 
           <div class="cert" data-aos="fade-up" data-aos-delay="80">
-            <!-- Save image as: main/images/aws_ml_specialty.png -->
-            <img src="main/images/aws_ml_specialty.png" srcset="main/images/aws_ml_specialty@2x.png 2x" alt="AWS ML Specialty badge" />
+            <img src="main/images/aws_ml_specialty.png" alt="AWS Certified Machine Learning — Specialty" />
             <p>AWS Certified Machine Learning — Specialty</p>
-            <a href="main/images/AWS_ML_Specialty_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
           <div class="cert" data-aos="fade-up" data-aos-delay="160">
-            <!-- Save image as: main/images/aws_ml_associate.png -->
-            <img src="main/images/aws_ml_associate.png" srcset="main/images/aws_ml_associate@2x.png 2x" alt="AWS ML Associate badge" />
+            <img src="main/images/aws_ml_associate.png" alt="AWS Certified Machine Learning — Associate" />
             <p>AWS Certified Machine Learning — Associate</p>
-            <a href="main/images/AWS_ML_Associate_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
           <div class="cert" data-aos="fade-up" data-aos-delay="240">
-            <!-- Save image as: main/images/azure_ai_engineer.png -->
-            <img src="main/images/azure_ai_engineer.png" srcset="main/images/azure_ai_engineer@2x.png 2x" alt="Azure AI Engineer badge" />
+            <img src="main/images/azure_ai_engineer.png" alt="Microsoft Certified: Azure AI Engineer Associate" />
             <p>Microsoft Certified: Azure AI Engineer Associate</p>
-            <a href="main/images/Azure_AI_Engineer_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
           <div class="cert" data-aos="fade-up" data-aos-delay="320">
-            <!-- Save image as: main/images/gcp_cloud_developer.png -->
-            <img src="main/images/gcp_cloud_developer.png" srcset="main/images/gcp_cloud_developer@2x.png 2x" alt="GCP Cloud Developer badge" />
+            <img src="main/images/gcp_cloud_developer.png" alt="Google Cloud Professional Cloud Developer" />
             <p>Google Cloud Professional Cloud Developer</p>
-            <a href="main/images/GCP_Cloud_Developer_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" data-aos="fade-right" data-aos-duration="900">
+    <section id="contact" data-aos="fade-right" data-aos-duration="800">
       <div class="card">
         <h2>Contact</h2>
-        <p>I'm open to collaborations, full-time roles, and contract work. Share a brief about your project and I'll respond promptly.</p>
+        <p>I'm open to full-time roles and collaborations. Available for daytime, full-time positions — share a brief about your project or role and I'll respond promptly.</p>
 
         <div style="height:12px"></div>
         <div class="contact-grid">
           <div>
             <p style="margin:6px 0"><strong>Email</strong><br>dloorthukanishta@gmail.com</p>
-            <p style="margin:6px 0"><strong>Phone</strong><br>+91 9150108849</p>
             <p style="margin:6px 0"><strong>Location</strong><br>Tamil Nadu, India</p>
-            <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--accent-a)">linkedin.com/in/loorthu-kanishta-d</a></p>
-            <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--accent-a)">github.com/loorthu-kanishta-d</a></p>
+            <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--accent-1)">linkedin.com/in/loorthu-kanishta-d</a></p>
+            <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--accent-1)">github.com/loorthu-kanishta-d</a></p>
           </div>
 
           <div>
@@ -560,16 +438,13 @@
     </div>
   </footer>
 
-  <!-- AOS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script>
-    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
+    AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
 
-    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Contact form handler (demo)
     function handleContact(e){
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
@@ -580,7 +455,6 @@
       e.target.reset();
     }
 
-    // Animate progress bars when skills section enters viewport
     const skillsObserver = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -595,7 +469,6 @@
     const skillsSection = document.querySelector('#skills');
     if(skillsSection) skillsObserver.observe(skillsSection);
 
-    // Small overlap reveal: add translateY on scroll for .card elements
     const cards = document.querySelectorAll('.card');
     const cardObserver = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
@@ -607,13 +480,12 @@
       });
     }, {threshold:0.12});
     cards.forEach(c=>{
-      c.style.transform = 'translateY(18px)';
+      c.style.transform = 'translateY(12px)';
       c.style.opacity = '0';
       cardObserver.observe(c);
     });
 
-    // Counters (simple animation)
-    function animateCounter(id, to, duration=900){
+    function animateCounter(id, to, duration=800){
       const el = document.getElementById(id);
       if(!el) return;
       let start = 0;
@@ -624,13 +496,12 @@
         el.textContent = start + (id==='counter-exp' ? '+' : '');
       }, 30);
     }
-    // trigger counters when about section visible
     const aboutObs = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
-          animateCounter('counter-exp', 3, 900);
-          animateCounter('counter-projects', 10, 900);
-          animateCounter('counter-cert', 4, 900);
+          animateCounter('counter-exp', 3, 800);
+          animateCounter('counter-projects', 10, 800);
+          animateCounter('counter-cert', 4, 800);
           aboutObs.disconnect();
         }
       });
