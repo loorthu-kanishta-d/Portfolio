@@ -8,19 +8,16 @@
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- AOS (optional) -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
   <style>
     :root{
-      --bg-1: #0b0710;
-      --bg-2: #2a0f24;
-      --panel: rgba(255,255,255,0.03);
-      --muted: #cbb7cf;
-      --accent-1: #7b2e6f;
-      --accent-2: #ff7fbf;
+      --bg-dark:#07040a;
+      --rose-deep:#2a0b1f;
+      --rose-mid:#7b2e6f;
+      --rose-accent:#ff7fbf;
+      --panel: rgba(255,255,255,0.02);
+      --muted:#cbb7cf;
       --glass: rgba(255,127,191,0.04);
-      --radius: 14px;
+      --card-radius:14px;
       --max-width:1100px;
     }
 
@@ -29,44 +26,42 @@
     body{
       margin:0;
       font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      background:linear-gradient(180deg,var(--bg-dark), #0b0710 100%);
       color:var(--muted);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      overflow-y:scroll;
+      line-height:1.45;
+      -webkit-font-feature-settings:"liga" 1;
     }
 
     .page{max-width:var(--max-width);margin:28px auto;padding:20px;position:relative}
 
-    /* subtle decorative gradients */
-    .decor-top{
+    /* decorative glow layers */
+    .glow-top{
       position:fixed;left:-10%;top:-12%;width:60vw;height:40vh;z-index:-3;
-      background:radial-gradient(closest-side, rgba(255,127,191,0.08), transparent 40%);
-      transform:rotate(-12deg);
-      pointer-events:none;
+      background:radial-gradient(closest-side, rgba(123,46,110,0.12), transparent 40%);
+      transform:rotate(-12deg);pointer-events:none;
     }
-    .decor-bottom{
+    .glow-bottom{
       position:fixed;right:-10%;bottom:-12%;width:60vw;height:40vh;z-index:-3;
-      background:radial-gradient(closest-side, rgba(123,46,110,0.06), transparent 40%);
-      transform:rotate(8deg);
-      pointer-events:none;
+      background:radial-gradient(closest-side, rgba(255,127,191,0.06), transparent 40%);
+      transform:rotate(8deg);pointer-events:none;
     }
 
     /* Header */
     header{
-      padding:28px;border-radius:var(--radius);margin-bottom:18px;
-      background:linear-gradient(180deg, rgba(255,127,191,0.02), rgba(123,46,110,0.02));
+      padding:26px;border-radius:var(--card-radius);margin-bottom:18px;
+      background:linear-gradient(180deg, rgba(123,46,110,0.03), rgba(20,8,18,0.02));
       border:1px solid rgba(255,127,191,0.03);
-      box-shadow:0 18px 50px rgba(0,0,0,0.45);
+      box-shadow:0 18px 50px rgba(0,0,0,0.55);
     }
-    .header-grid{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .header-grid{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
     .title-block{min-width:0;flex:1}
     h1{margin:0;font-size:2rem;color:#fff;font-weight:700}
-    .subtitle{margin:6px 0 0;color:var(--muted);font-size:1rem}
+    .subtitle{margin:8px 0 0;color:var(--muted);font-size:1rem}
     .header-actions{display:flex;gap:12px;align-items:center;margin-top:12px}
     .btn{
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      background:linear-gradient(90deg,var(--rose-mid),var(--rose-accent));
       color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700;text-decoration:none;cursor:pointer;
       box-shadow:0 10px 30px rgba(123,46,110,0.18);
     }
@@ -75,44 +70,47 @@
     .stat{background:var(--panel);padding:10px 14px;border-radius:12px;border:1px solid rgba(255,127,191,0.03);min-width:120px;text-align:center}
     .stat strong{display:block;color:#fff;font-size:1.15rem}
 
-    /* Alternating boxed sections */
+    /* Sections container */
     .sections{display:flex;flex-direction:column;gap:28px;margin-top:18px}
+
+    /* Alternating section layout */
     .section{
       display:grid;
-      grid-template-columns:1fr 420px;
+      grid-template-columns:1fr 360px;
       gap:18px;
       align-items:start;
       position:relative;
     }
-    .section .panel{
-      background:var(--panel);
-      border-radius:var(--radius);
-      padding:20px;
-      border:1px solid rgba(255,127,191,0.03);
-      box-shadow:0 18px 50px rgba(0,0,0,0.45);
-      transition:transform .5s cubic-bezier(.2,.9,.2,1), box-shadow .5s;
-      transform-origin:center center;
+    .section.right{grid-template-columns:360px 1fr}
+    @media (max-width:980px){
+      .section{grid-template-columns:1fr}
+      .section.right{grid-template-columns:1fr}
     }
 
-    /* alternate layout: left content / right small box OR right content / left small box */
-    .section.left .panel.content{grid-column:1}
-    .section.left .panel.side{grid-column:2}
-    .section.right{grid-template-columns:420px 1fr}
-    .section.right .panel.side{grid-column:1}
-    .section.right .panel.content{grid-column:2}
+    /* Panels */
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--card-radius);
+      padding:20px;
+      border:1px solid rgba(255,127,191,0.02);
+      box-shadow:0 18px 50px rgba(0,0,0,0.55);
+      transition:transform .6s cubic-bezier(.2,.9,.2,1), box-shadow .45s, opacity .45s;
+      transform-origin:center center;
+      will-change:transform,opacity;
+    }
 
-    /* small side box */
+    .panel h2{margin:0 0 8px;color:#fff;font-size:1.12rem}
+    .panel p{margin:0;color:var(--muted)}
+
     .panel.side{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
     .panel.side strong{color:#fff}
     .panel.side .mini{background:var(--glass);padding:10px;border-radius:10px;width:100%;text-align:center;color:var(--muted);border:1px solid rgba(255,127,191,0.02)}
 
-    /* content panel */
-    .panel.content h2{margin:0 0 8px;color:#fff;font-size:1.15rem}
-    .panel.content p{margin:0;color:var(--muted)}
+    /* About list */
     .about-list{display:grid;gap:8px;margin-top:12px}
     .about-list div{display:flex;justify-content:space-between;padding:10px;border-radius:10px;background:rgba(255,255,255,0.01);color:var(--muted);border:1px solid rgba(255,127,191,0.02)}
 
-    /* projects compact */
+    /* Projects compact */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-top:12px}
     .project-card{
       display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
@@ -126,41 +124,40 @@
     .project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
     .tag{background:rgba(255,255,255,0.01);padding:6px 8px;border-radius:8px;font-size:0.82rem;color:var(--muted)}
 
-    /* timeline */
+    /* Timeline */
     .timeline{position:relative;padding-left:14px}
-    .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));border-radius:3px}
+    .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--rose-mid),var(--rose-accent));border-radius:3px}
     .timeline-item{position:relative;margin:18px 0 18px 16px}
-    .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--accent-2)}
+    .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--rose-accent)}
     .role{font-weight:700;color:#fff}
     .company{font-weight:600;color:var(--muted);margin-bottom:6px}
     .exp-list{margin:8px 0 0 16px;color:var(--muted)}
 
-    /* certifications */
+    /* Certifications */
     .cert-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
     .cert{width:160px;text-align:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,127,191,0.02)}
     .cert img{width:88px;height:auto;display:block;margin:0 auto 8px}
     .cert p{margin:6px 0 0;font-weight:700;color:#fff}
 
-    /* contact */
+    /* Contact */
     .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
     .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted)}
-    .contact-form button{display:inline-block;margin-top:8px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700}
+    .contact-form button{display:inline-block;margin-top:8px;background:linear-gradient(90deg,var(--rose-mid),var(--rose-accent));color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700}
 
-    /* zoom helper */
-    .zoom{transform:scale(.98);opacity:.92;transition:transform .6s ease,opacity .6s ease}
-    .zoom.in-view{transform:scale(1);opacity:1}
+    /* sliding & zoom helpers */
+    .slide-left{transform:translateX(-36px) scale(.98);opacity:.88}
+    .slide-right{transform:translateX(36px) scale(.98);opacity:.88}
+    .in-view{transform:translateX(0) scale(1);opacity:1;box-shadow:0 30px 70px rgba(0,0,0,0.6)}
 
     @media (max-width:980px){
-      .section{grid-template-columns:1fr;gap:12px}
-      .section.right{grid-template-columns:1fr}
       .projects-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
       .page{padding:16px}
     }
   </style>
 </head>
 <body>
-  <div class="decor-top" aria-hidden="true"></div>
-  <div class="decor-bottom" aria-hidden="true"></div>
+  <div class="glow-top" aria-hidden="true"></div>
+  <div class="glow-bottom" aria-hidden="true"></div>
 
   <div class="page">
     <header>
@@ -185,7 +182,7 @@
     <div class="sections">
 
       <!-- About (left) -->
-      <section class="section left zoom" data-aos="fade-up" data-aos-duration="700">
+      <section class="section left slide-left" data-id="about">
         <div class="panel content">
           <h2>About Me</h2>
           <p>I design and ship production-grade AI systems and developer tools. My focus is on building robust ML pipelines, integrating LLMs into enterprise workflows, and automating operational tasks. I enjoy turning research ideas into reliable products and helping teams adopt best practices for deployment and observability.</p>
@@ -201,7 +198,7 @@
           </div>
         </div>
 
-        <aside class="panel side">
+        <aside class="panel side slide-right">
           <strong>Technical Highlights</strong>
           <div class="mini">Production ML: SageMaker, model serving, A/B testing, drift detection</div>
           <div class="mini">LLMs & RAG: Retrieval pipelines, vector stores, prompt engineering</div>
@@ -210,113 +207,86 @@
       </section>
 
       <!-- Skills (right) -->
-      <section class="section right zoom" data-aos="fade-up" data-aos-duration="700">
-        <aside class="panel side">
+      <section class="section right slide-right" data-id="skills">
+        <aside class="panel side slide-left">
           <strong>Tools & Frameworks</strong>
           <div class="mini">Python · PyTorch · TensorFlow · Hugging Face</div>
           <div class="mini">SageMaker · Docker · Kubernetes · Postgres</div>
         </aside>
 
-        <div class="panel content">
+        <div class="panel content slide-right">
           <h2>Skills</h2>
           <p>Practical, production-focused skills across ML, backend engineering, and cloud infrastructure.</p>
 
           <div style="height:12px"></div>
-          <div class="skills-grid">
-            <div class="skill" data-aos="fade-up" data-aos-delay="80">
-              <strong>Python & Ecosystem</strong>
-              <p style="margin:6px 0 8px;color:var(--muted)">Scripting, libraries, packaging, async patterns, testing.</p>
-              <div class="progress"><i style="width:94%"></i></div>
+          <div class="projects-grid">
+            <div class="project-card">
+              <img class="project-logo" src="images/project1.png" alt="python" />
+              <div style="flex:1">
+                <div class="project-title"><h3>Python & Ecosystem</h3><span style="color:var(--muted)">Scripting, testing</span></div>
+                <div class="project-desc">Scripting, libraries, packaging, async patterns, testing.</div>
+              </div>
             </div>
 
-            <div class="skill" data-aos="fade-up" data-aos-delay="140">
-              <strong>Machine Learning</strong>
-              <p style="margin:6px 0 8px;color:var(--muted)">Modeling, feature engineering, evaluation, hyperparameter tuning.</p>
-              <div class="progress"><i style="width:88%"></i></div>
+            <div class="project-card">
+              <img class="project-logo" src="images/project2.png" alt="ml" />
+              <div style="flex:1">
+                <div class="project-title"><h3>Machine Learning</h3><span style="color:var(--muted)">Modeling</span></div>
+                <div class="project-desc">Modeling, feature engineering, evaluation, hyperparameter tuning.</div>
+              </div>
             </div>
 
-            <div class="skill" data-aos="fade-up" data-aos-delay="200">
-              <strong>Deep Learning</strong>
-              <p style="margin:6px 0 8px;color:var(--muted)">CNNs, RNNs, Transformers, fine-tuning LLMs.</p>
-              <div class="progress"><i style="width:82%"></i></div>
-            </div>
-
-            <div class="skill" data-aos="fade-up" data-aos-delay="260">
-              <strong>LLMs & RAG</strong>
-              <p style="margin:6px 0 8px;color:var(--muted)">Retrieval, vector stores, prompt design, chain-of-thought flows.</p>
-              <div class="progress"><i style="width:86%"></i></div>
-            </div>
-
-            <div class="skill" data-aos="fade-up" data-aos-delay="320">
-              <strong>Cloud & DevOps</strong>
-              <p style="margin:6px 0 8px;color:var(--muted)">AWS services, CI/CD, containerization, monitoring.</p>
-              <div class="progress"><i style="width:84%"></i></div>
-            </div>
-
-            <div class="skill" data-aos="fade-up" data-aos-delay="380">
-              <strong>APIs & Integration</strong>
-              <p style="margin:6px 0 8px;color:var(--muted)">Designing robust REST/GraphQL endpoints and integrations.</p>
-              <div class="progress"><i style="width:88%"></i></div>
+            <div class="project-card">
+              <img class="project-logo" src="images/project3.png" alt="llm" />
+              <div style="flex:1">
+                <div class="project-title"><h3>LLMs & RAG</h3><span style="color:var(--muted)">Retrieval</span></div>
+                <div class="project-desc">Retrieval, vector stores, prompt design, chain-of-thought flows.</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Projects (left) -->
-      <section class="section left zoom" id="projects" data-aos="fade-up" data-aos-duration="700">
-        <div class="panel content">
+      <section class="section left slide-left" id="projects" data-id="projects">
+        <div class="panel content slide-left">
           <h2>Selected Projects</h2>
           <p>Representative work showing end-to-end delivery, production readiness, and measurable impact. (I completed 25+ projects during office work; below are three highlighted ones.)</p>
 
           <div class="projects-grid" style="margin-top:12px;">
             <!-- Bird Sound -->
-            <article class="project-card zoom" data-aos="fade-up" data-aos-delay="80">
+            <article class="project-card slide-left">
               <img class="project-logo" src="images/bird_waveform.png" alt="Bird sound logo" />
               <div style="flex:1">
-                <div class="project-title">
-                  <h3>AI Bird Sound</h3>
-                  <span style="color:var(--muted)">Audio ML</span>
-                </div>
+                <div class="project-title"><h3>AI Bird Sound</h3><span style="color:var(--muted)">Audio ML</span></div>
                 <div class="project-desc">Built a full pipeline to detect and classify bird species from audio recordings. Preprocessing used noise reduction and MFCC features; model was an LSTM ensemble with confidence calibration. Deployed as a serverless inference endpoint with batch processing and a lightweight dashboard for conservation teams.</div>
-                <div class="project-tags">
-                  <span class="tag">Python</span><span class="tag">Librosa</span><span class="tag">PyTorch</span><span class="tag">AWS Lambda</span>
-                </div>
+                <div class="project-tags"><span class="tag">Python</span><span class="tag">Librosa</span><span class="tag">PyTorch</span><span class="tag">AWS Lambda</span></div>
               </div>
             </article>
 
             <!-- LLM Chatbot -->
-            <article class="project-card zoom" data-aos="fade-up" data-aos-delay="160">
+            <article class="project-card slide-left">
               <img class="project-logo" src="images/project_chatbot_thumb.png" alt="LLM chatbot logo" />
               <div style="flex:1">
-                <div class="project-title">
-                  <h3>LLM Chatbot</h3>
-                  <span style="color:var(--muted)">RAG · Conversational AI</span>
-                </div>
+                <div class="project-title"><h3>LLM Chatbot</h3><span style="color:var(--muted)">RAG · Conversational AI</span></div>
                 <div class="project-desc">Designed a RAG pipeline using vector search and chunked documents to provide accurate answers from internal knowledge bases. Implemented prompt templates, safety filters, and a feedback loop to improve retrieval quality. Integrated with Slack and internal ticketing systems for automated triage.</div>
-                <div class="project-tags">
-                  <span class="tag">Hugging Face</span><span class="tag">FAISS</span><span class="tag">FastAPI</span><span class="tag">Docker</span>
-                </div>
+                <div class="project-tags"><span class="tag">Hugging Face</span><span class="tag">FAISS</span><span class="tag">FastAPI</span><span class="tag">Docker</span></div>
               </div>
             </article>
 
             <!-- Automation -->
-            <article class="project-card zoom" data-aos="fade-up" data-aos-delay="240">
+            <article class="project-card slide-left">
               <img class="project-logo" src="images/aws_ml_specialty.png" alt="Automation logo" />
               <div style="flex:1">
-                <div class="project-title">
-                  <h3>TCS Automation</h3>
-                  <span style="color:var(--muted)">Runbook Automation</span>
-                </div>
+                <div class="project-title"><h3>TCS Automation</h3><span style="color:var(--muted)">Runbook Automation</span></div>
                 <div class="project-desc">Converted manual runbook tasks into Python APIs and automation scripts. Integrated with ServiceNow, Jenkins, and Splunk to automatically link related incidents, reducing manual effort and mean time to resolution. Added observability and retry logic for reliability.</div>
-                <div class="project-tags">
-                  <span class="tag">Django</span><span class="tag">ServiceNow</span><span class="tag">Splunk</span><span class="tag">Jenkins</span>
-                </div>
+                <div class="project-tags"><span class="tag">Django</span><span class="tag">ServiceNow</span><span class="tag">Splunk</span><span class="tag">Jenkins</span></div>
               </div>
             </article>
           </div>
         </div>
 
-        <aside class="panel side">
+        <aside class="panel side slide-right">
           <strong>Project summary</strong>
           <div class="mini">Automation · Chatbot · Audio ML</div>
           <div class="mini">25+ projects completed during office work</div>
@@ -324,20 +294,20 @@
       </section>
 
       <!-- Experience (right) -->
-      <section class="section right zoom" data-aos="fade-up" data-aos-duration="700">
-        <aside class="panel side">
+      <section class="section right slide-right" data-id="experience">
+        <aside class="panel side slide-left">
           <strong>Role highlights</strong>
           <div class="mini">Architecture, prompt design, safety controls</div>
           <div class="mini">RAG pipelines, vector stores, relevance tuning</div>
         </aside>
 
-        <div class="panel content">
+        <div class="panel content slide-right">
           <h2>Experience</h2>
           <p>Detailed roles and accomplishments showing progression, impact, and technical ownership.</p>
 
           <div style="height:12px"></div>
           <div class="timeline">
-            <div class="timeline-item" data-aos="fade-up" data-aos-delay="80">
+            <div class="timeline-item">
               <div class="company">Tata Consultancy Services</div>
               <div class="role">AI Software Engineer — Feb 2026 - Present (Full-time)</div>
               <div class="exp-list">
@@ -351,7 +321,7 @@
               </div>
             </div>
 
-            <div class="timeline-item" data-aos="fade-up" data-aos-delay="160">
+            <div class="timeline-item">
               <div class="company">Tata Consultancy Services</div>
               <div class="role">Automation Tool Programmer — Jan 2025 - Feb 2026 (Full-time)</div>
               <div class="exp-list">
@@ -364,7 +334,7 @@
               </div>
             </div>
 
-            <div class="timeline-item" data-aos="fade-up" data-aos-delay="240">
+            <div class="timeline-item">
               <div class="company">Tata Consultancy Services</div>
               <div class="role">Python Developer — Jun 2024 - Jan 2025 (On-site, Chennai)</div>
               <div class="exp-list">
@@ -380,49 +350,49 @@
       </section>
 
       <!-- Certifications (left) -->
-      <section class="section left zoom" data-aos="fade-up" data-aos-duration="700">
+      <section class="section left slide-left" data-id="certifications">
         <div class="panel content">
           <h2>Certifications</h2>
           <p>Cloud and AI badges (images only).</p>
 
           <div class="cert-grid">
-            <div class="cert" data-aos="fade-up" data-aos-delay="80">
+            <div class="cert">
               <img src="images/aws_ml_specialty.png" alt="AWS Certified Machine Learning — Specialty" />
               <p>AWS Certified Machine Learning — Specialty</p>
             </div>
 
-            <div class="cert" data-aos="fade-up" data-aos-delay="160">
+            <div class="cert">
               <img src="images/aws_ml_associate.png" alt="AWS Certified Machine Learning — Associate" />
               <p>AWS Certified Machine Learning — Associate</p>
             </div>
 
-            <div class="cert" data-aos="fade-up" data-aos-delay="240">
+            <div class="cert">
               <img src="images/azure_ai_engineer.png" alt="Microsoft Certified: Azure AI Engineer Associate" />
               <p>Microsoft Certified: Azure AI Engineer Associate</p>
             </div>
 
-            <div class="cert" data-aos="fade-up" data-aos-delay="320">
+            <div class="cert">
               <img src="images/gcp_cloud_developer.png" alt="Google Cloud Professional Cloud Developer" />
               <p>Google Cloud Professional Cloud Developer</p>
             </div>
           </div>
         </div>
 
-        <aside class="panel side">
+        <aside class="panel side slide-right">
           <strong>Badges</strong>
           <div class="mini">Cloud & AI certifications</div>
         </aside>
       </section>
 
       <!-- Contact (right) -->
-      <section class="section right zoom" id="contact" data-aos="fade-up" data-aos-duration="700">
-        <aside class="panel side">
+      <section class="section right slide-right" id="contact">
+        <aside class="panel side slide-left">
           <strong>Reach out</strong>
           <div class="mini">Available for daytime, full-time roles</div>
           <div class="mini">Share a brief about your project and I'll respond promptly</div>
         </aside>
 
-        <div class="panel content">
+        <div class="panel content slide-right">
           <h2>Contact</h2>
           <p>I'm open to full-time roles and collaborations. Available for daytime, full-time positions — share a brief about your project or role and I'll respond promptly.</p>
 
@@ -431,8 +401,8 @@
             <div>
               <p style="margin:6px 0"><strong>Email</strong><br>dloorthukanishta@gmail.com</p>
               <p style="margin:6px 0"><strong>Location</strong><br>Tamil Nadu, India</p>
-              <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--accent-2)">linkedin.com/in/loorthu-kanishta-d</a></p>
-              <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--accent-2)">github.com/loorthu-kanishta-d</a></p>
+              <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--rose-accent)">linkedin.com/in/loorthu-kanishta-d</a></p>
+              <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--rose-accent)">github.com/loorthu-kanishta-d</a></p>
             </div>
 
             <div>
@@ -455,11 +425,23 @@
     </footer>
   </div>
 
-  <!-- AOS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
   <script>
-    AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
+    // IntersectionObserver to add sliding/zoom in-view classes
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const el = entry.target;
+        if(entry.isIntersecting){
+          el.classList.add('in-view');
+        } else {
+          el.classList.remove('in-view');
+        }
+      });
+    }, {threshold:0.28});
+
+    // Observe panels and project cards
+    document.querySelectorAll('.panel, .project-card, .section').forEach(el=>{
+      observer.observe(el);
+    });
 
     // Contact demo handler
     function handleContact(e){
@@ -487,23 +469,13 @@
     const skillsSection = document.querySelector('#skills');
     if(skillsSection) skillsObserver.observe(skillsSection);
 
-    // Zoom-in effect for panels and project cards
-    const zoomEls = document.querySelectorAll('.zoom');
-    const zoomObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting) entry.target.classList.add('in-view');
-        else entry.target.classList.remove('in-view');
-      });
-    }, {threshold:0.28});
-    zoomEls.forEach(el => zoomObserver.observe(el));
-
-    // subtle parallax for decorative layers
-    const decorTop = document.querySelector('.decor-top');
-    const decorBottom = document.querySelector('.decor-bottom');
+    // subtle parallax for glow layers
+    const glowTop = document.querySelector('.glow-top');
+    const glowBottom = document.querySelector('.glow-bottom');
     window.addEventListener('scroll', ()=>{
       const y = window.scrollY;
-      if(decorTop) decorTop.style.transform = `translateY(${y * 0.02}px) rotate(-12deg)`;
-      if(decorBottom) decorBottom.style.transform = `translateY(${y * -0.02}px) rotate(8deg)`;
+      if(glowTop) glowTop.style.transform = `translateY(${y * 0.02}px) rotate(-12deg)`;
+      if(glowBottom) glowBottom.style.transform = `translateY(${y * -0.02}px) rotate(8deg)`;
     });
 
     // set year
