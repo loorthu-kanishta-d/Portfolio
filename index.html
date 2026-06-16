@@ -10,12 +10,12 @@
 
   <style>
     :root{
-      --accent-1:#6b8e8f;
-      --accent-2:#7b6fa6;
-      --bg:#f4f7f6;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --glass: rgba(107,142,143,0.06);
+      --rose-1: #3b0f2f;   /* deep rose / near-black */
+      --rose-2: #7b2e6f;   /* rich purple-rose */
+      --accent: #ff7fbf;   /* soft pink accent */
+      --card: #0f0b12;     /* dark card background */
+      --muted: #b9a9b9;    /* muted lavender text */
+      --glass: rgba(255,127,191,0.06);
       --max-width:1100px;
     }
 
@@ -24,116 +24,126 @@
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      background:linear-gradient(180deg,#eef6f2 0%, #f7f9fb 100%);
-      color:#0f1724;
+      background:linear-gradient(180deg,var(--rose-1) 0%, #120617 100%);
+      color:var(--muted);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       -webkit-font-feature-settings:"liga" 1;
-      -webkit-font-kerning:normal;
     }
 
-    .wrap{max-width:var(--max-width);margin:28px auto;padding:0 20px 80px;position:relative}
+    /* page container */
+    .wrap{max-width:var(--max-width);margin:28px auto;padding:20px;position:relative}
 
-    /* Parallax natural background layer */
+    /* subtle parallax background layer */
     .bg-layer{
-      position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:0.06;
-      background-image:url('images/nature_bg.jpg');
-      background-size:cover;background-position:center;
+      position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:0.12;
+      background:
+        radial-gradient(800px 300px at 10% 10%, rgba(123,46,110,0.12), transparent 10%),
+        radial-gradient(700px 260px at 90% 80%, rgba(255,127,191,0.06), transparent 12%),
+        linear-gradient(180deg,var(--rose-1),#0b0710);
       transform:translateZ(0);
     }
 
-    /* Header */
+    /* header */
     header{
-      display:flex;align-items:center;justify-content:space-between;gap:20px;padding:36px;border-radius:14px;
-      background:linear-gradient(180deg, rgba(123,111,166,0.03), rgba(107,142,143,0.01));
-      box-shadow:0 10px 40px rgba(15,23,36,0.04);
-      position:relative;overflow:visible;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:28px;border-radius:14px;
+      background:linear-gradient(180deg, rgba(255,127,191,0.03), rgba(123,46,110,0.02));
+      box-shadow:0 18px 50px rgba(0,0,0,0.45);
+      position:relative;overflow:visible;border:1px solid rgba(255,127,191,0.04);
     }
     .hero-left{flex:1;min-width:0}
-    header h1{font-size:2.1rem;margin:0 0 6px;color:#0f1724}
+    header h1{font-size:2.05rem;margin:0 0 6px;color:#fff;letter-spacing:0.2px}
     header p{margin:0 0 12px;color:var(--muted);font-size:1.02rem}
     .hero-cta{display:flex;gap:12px;align-items:center}
-    .btn{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 10px 30px rgba(107,142,143,0.08)}
-    .counters{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
-    .counter{background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));padding:10px 14px;border-radius:12px;min-width:120px;text-align:center;border:1px solid rgba(15,23,36,0.04)}
-    .counter strong{display:block;font-size:1.25rem;color:#0f1724}
-
-    /* Avatar card overlapping header */
-    .avatar-card{
-      width:160px;height:160px;border-radius:14px;background:linear-gradient(135deg,#eaf6f4,#f0eaf8);
-      display:flex;align-items:center;justify-content:center;box-shadow:0 18px 50px rgba(15,23,36,0.06);
-      position:absolute;right:20px;top: -40px;border:1px solid rgba(15,23,36,0.04);overflow:hidden;
+    .btn{
+      background:linear-gradient(90deg,var(--rose-2),var(--accent));
+      color:#120617;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;
+      box-shadow:0 10px 30px rgba(123,46,110,0.18);
     }
-    .avatar-card img{width:100%;height:100%;object-fit:cover}
 
-    main{margin-top:48px}
+    .counters{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+    .counter{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 14px;border-radius:12px;min-width:120px;text-align:center;border:1px solid rgba(255,127,191,0.03)}
+    .counter strong{display:block;font-size:1.25rem;color:#fff}
 
-    /* Card style */
+    /* avatar overlapping header */
+    .avatar-card{
+      width:160px;height:160px;border-radius:14px;background:linear-gradient(135deg,#2b0b1f,#3b0f2f);
+      display:flex;align-items:center;justify-content:center;box-shadow:0 24px 60px rgba(0,0,0,0.6);
+      position:absolute;right:20px;top:-48px;border:1px solid rgba(255,127,191,0.06);overflow:hidden;
+    }
+    .avatar-card img{width:100%;height:100%;object-fit:cover;filter:contrast(1.02) saturate(1.05)}
+
+    main{margin-top:64px}
+
+    /* card */
     .card{
-      background:var(--card);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border-radius:14px;padding:22px;margin-bottom:28px;
-      box-shadow:0 12px 40px rgba(15,23,36,0.04);border:1px solid rgba(15,23,36,0.03);
+      box-shadow:0 18px 60px rgba(0,0,0,0.55);border:1px solid rgba(255,127,191,0.03);
       transition:transform .45s ease, box-shadow .45s ease;
       position:relative;overflow:visible;
     }
-
-    h2{font-size:1.2rem;margin:0 0 12px;color:#0f1724}
+    h2{font-size:1.2rem;margin:0 0 12px;color:#fff}
     p{line-height:1.6;color:var(--muted)}
 
-    /* About grid */
+    /* about grid */
     .about-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
     .about-list{display:grid;gap:10px;margin-top:12px}
     .about-list div{display:flex;justify-content:space-between;padding:10px 12px;border-radius:10px;background:var(--glass);color:var(--muted)}
 
-    /* Skills */
+    /* skills */
     .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-    .skill{padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfbfd);text-align:left;border:1px solid rgba(15,23,36,0.03)}
-    .skill strong{display:block;margin-bottom:8px;color:#0f1724}
-    .progress{height:10px;background:#eef3f4;border-radius:999px;overflow:hidden}
-    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));width:0%;transition:width 1.2s ease}
+    .skill{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:left;border:1px solid rgba(255,127,191,0.02)}
+    .skill strong{display:block;margin-bottom:8px;color:#fff}
+    .progress{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--rose-2),var(--accent));width:0%;transition:width 1.2s ease}
 
-    /* Projects: compact logo + title layout, interactive cards */
+    /* projects: compact logo + title layout, interactive cards */
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:12px}
     .project-card{
-      display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfcfd);
-      border:1px solid rgba(15,23,36,0.03);transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s, z-index .1s;
+      display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,127,191,0.02);transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s, z-index .1s;
       will-change:transform;transform-origin:center center;cursor:default;
     }
-    .project-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 30px 70px rgba(15,23,36,0.10);z-index:6}
-    .project-logo{width:40px;height:40px;border-radius:6px;object-fit:cover;border:1px solid rgba(15,23,36,0.04);flex-shrink:0}
+    .project-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 30px 70px rgba(0,0,0,0.6);z-index:6}
+    .project-logo{width:40px;height:40px;border-radius:6px;object-fit:cover;border:1px solid rgba(255,127,191,0.04);flex-shrink:0}
     .project-body{flex:1;min-width:0}
     .project-title{display:flex;align-items:center;gap:8px;justify-content:space-between}
-    .project-title h3{font-size:1rem;margin:0;color:#0f1724}
+    .project-title h3{font-size:1rem;margin:0;color:#fff}
     .project-desc{margin:6px 0 0;color:var(--muted);font-size:0.95rem}
     .project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .tag{background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.82rem;color:var(--muted)}
+    .tag{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.82rem;color:var(--muted)}
 
-    /* Overlap / mosaic effect for sections */
+    /* mosaic / overlap */
     .mosaic-row{display:flex;gap:18px;align-items:stretch}
     .mosaic-left{flex:1}
     .mosaic-right{width:360px}
 
-    /* Experience timeline compact */
+    /* timeline */
     .timeline{position:relative;padding-left:14px}
-    .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));border-radius:3px}
+    .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--rose-2),var(--accent));border-radius:3px}
     .timeline-item{position:relative;margin:18px 0 18px 16px}
-    .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--accent-2)}
-    .role{font-weight:800;color:#0f1724}
+    .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
+    .role{font-weight:800;color:#fff}
     .company{font-weight:700;color:var(--muted);margin-bottom:6px}
     .exp-list{margin:8px 0 0 16px;color:var(--muted)}
 
-    /* Certifications grid */
+    /* certs */
     .cert-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;margin-top:12px}
-    .cert{width:180px;text-align:center;padding:12px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
+    .cert{width:180px;text-align:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,127,191,0.02)}
     .cert img{width:88px;height:auto;display:block;margin:0 auto 8px}
-    .cert p{margin:6px 0 0;font-weight:700;color:#0f1724}
+    .cert p{margin:6px 0 0;font-weight:700;color:#fff}
 
-    /* Contact form */
+    /* contact */
     .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
-    .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(15,23,36,0.06);background:#fff;color:#0f1724}
-    .contact-form button{display:inline-block;margin-top:8px}
+    .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.02);color:var(--muted)}
+    .contact-form button{display:inline-block;margin-top:8px;background:linear-gradient(90deg,var(--rose-2),var(--accent));color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700}
 
     footer{padding:18px 0;text-align:center;color:var(--muted);background:transparent;margin-top:20px}
+
+    /* zoom-in helper */
+    .zoom-in{transform:scale(.98);opacity:.92;transition:transform .6s ease,opacity .6s ease}
+    .zoom-in.in-view{transform:scale(1);opacity:1}
 
     @media (max-width:980px){
       .about-grid{grid-template-columns:1fr}
@@ -141,6 +151,7 @@
       .mosaic-right{width:100%}
       .avatar-card{display:none}
       .projects-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+      .contact-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -215,14 +226,14 @@
                 <div style="margin-top:12px">
                   <p style="margin:0 0 6px"><strong>Tools & Frameworks</strong></p>
                   <div style="display:flex;gap:8px;flex-wrap:wrap">
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Python</span>
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">PyTorch</span>
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">TensorFlow</span>
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Hugging Face</span>
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">SageMaker</span>
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Docker</span>
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Kubernetes</span>
-                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Postgres</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Python</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">PyTorch</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">TensorFlow</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Hugging Face</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">SageMaker</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Docker</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Kubernetes</span>
+                    <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Postgres</span>
                   </div>
                 </div>
               </div>
@@ -230,28 +241,27 @@
           </div>
 
           <aside class="mosaic-right" aria-hidden="true">
-            <!-- small visual highlights stacked -->
             <div style="display:flex;flex-direction:column;gap:12px">
-              <div style="padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfcfd);box-shadow:0 8px 24px rgba(15,23,36,0.04);border:1px solid rgba(15,23,36,0.03)">
-                <strong style="display:block;margin-bottom:6px;color:#0f1724">Quick Stats</strong>
+              <div style="padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 24px rgba(0,0,0,0.45);border:1px solid rgba(255,127,191,0.02)">
+                <strong style="display:block;margin-bottom:6px;color:#fff">Quick Stats</strong>
                 <div style="display:flex;gap:8px;flex-wrap:wrap">
                   <div style="background:var(--glass);padding:8px;border-radius:8px;min-width:100px;text-align:center">
-                    <div style="font-weight:800">2+</div>
+                    <div style="font-weight:800;color:#fff">2+</div>
                     <div style="color:var(--muted)">Years</div>
                   </div>
                   <div style="background:var(--glass);padding:8px;border-radius:8px;min-width:100px;text-align:center">
-                    <div style="font-weight:800">25+</div>
+                    <div style="font-weight:800;color:#fff">25+</div>
                     <div style="color:var(--muted)">Projects</div>
                   </div>
                   <div style="background:var(--glass);padding:8px;border-radius:8px;min-width:100px;text-align:center">
-                    <div style="font-weight:800">4</div>
+                    <div style="font-weight:800;color:#fff">4</div>
                     <div style="color:var(--muted)">Certs</div>
                   </div>
                 </div>
               </div>
 
-              <div style="padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfcfd);box-shadow:0 8px 24px rgba(15,23,36,0.04);border:1px solid rgba(15,23,36,0.03)">
-                <strong style="display:block;margin-bottom:8px;color:#0f1724">Focus Areas</strong>
+              <div style="padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 24px rgba(0,0,0,0.45);border:1px solid rgba(255,127,191,0.02)">
+                <strong style="display:block;margin-bottom:8px;color:#fff">Focus Areas</strong>
                 <ul style="margin:0 0 0 16px;color:var(--muted)">
                   <li>LLM Integrations & RAG</li>
                   <li>Production ML Systems</li>
@@ -308,7 +318,7 @@
         </div>
       </section>
 
-      <!-- Projects: only three highlighted, logos small and inline -->
+      <!-- Projects -->
       <section class="card" id="projects" data-aos="fade-up" data-aos-duration="700">
         <h2>Selected Projects</h2>
         <p>Representative work showing end-to-end delivery, production readiness, and measurable impact. (I completed 25+ projects during office work; below are three highlighted ones.)</p>
@@ -447,8 +457,8 @@
           <div>
             <p style="margin:6px 0"><strong>Email</strong><br>dloorthukanishta@gmail.com</p>
             <p style="margin:6px 0"><strong>Location</strong><br>Tamil Nadu, India</p>
-            <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--accent-1)">linkedin.com/in/loorthu-kanishta-d</a></p>
-            <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--accent-1)">github.com/loorthu-kanishta-d</a></p>
+            <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--accent)">linkedin.com/in/loorthu-kanishta-d</a></p>
+            <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--accent)">github.com/loorthu-kanishta-d</a></p>
           </div>
 
           <div>
@@ -515,7 +525,7 @@
     const bg = document.querySelector('.bg-layer');
     window.addEventListener('scroll', ()=>{
       const y = window.scrollY;
-      bg.style.transform = `translateY(${y * 0.06}px)`;
+      bg.style.transform = `translateY(${y * 0.04}px)`;
     });
 
     // Set current year
