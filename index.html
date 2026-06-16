@@ -1,486 +1,354 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loorthu Kanishta D — Portfolio & Resume</title>
+  <title>Loorthu Kanishta D — Portfolio</title>
 
-  <!-- Font: Montserrat for a clean modern look -->
+  <!-- Clean modern font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg-1:#06040a;
+      --bg:#07040a;
       --rose-deep:#2b0718;
       --rose-mid:#7b2e6f;
       --rose-accent:#ff7fbf;
-      --panel: rgba(255,255,255,0.02);
       --muted:#cbb7cf;
+      --card:#0b0710;
       --glass: rgba(255,127,191,0.04);
-      --card-radius:14px;
+      --panel-dark: rgba(6,4,10,0.78);
+      --radius:14px;
       --max-width:1100px;
-      --accent-text:#fff1f8;
-      --box-black: rgba(6,4,10,0.75);
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      background:linear-gradient(180deg,var(--bg-1), #0b0710 100%);
-      color:var(--muted);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-    }
+    html,body{height:100%;margin:0;font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:
+      linear-gradient(180deg,var(--bg), #0b0710);color:var(--muted);-webkit-font-smoothing:antialiased}
+    a{color:var(--rose-accent);text-decoration:none}
 
-    .page{max-width:var(--max-width);margin:28px auto;padding:20px;position:relative}
+    .page{max-width:var(--max-width);margin:28px auto;padding:20px}
 
-    /* decorative rose/purple glows */
-    .glow-top{
-      position:fixed;left:-12%;top:-14%;width:62vw;height:42vh;z-index:-3;
-      background:radial-gradient(closest-side, rgba(123,46,110,0.16), transparent 36%);
-      transform:rotate(-14deg);pointer-events:none;
-    }
-    .glow-bottom{
-      position:fixed;right:-12%;bottom:-14%;width:62vw;height:42vh;z-index:-3;
-      background:radial-gradient(closest-side, rgba(255,127,191,0.08), transparent 36%);
-      transform:rotate(10deg);pointer-events:none;
-    }
-
-    /* Header */
+    /* Header layout: two-column responsive (title + contact card) */
     header{
-      padding:26px;border-radius:var(--card-radius);margin-bottom:18px;
-      background:linear-gradient(180deg, rgba(123,46,110,0.05), rgba(20,8,18,0.02));
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:18px;
+      align-items:start;
+      padding:22px;
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(123,46,110,0.04), rgba(20,8,18,0.02));
       border:1px solid rgba(255,127,191,0.04);
-      box-shadow:0 22px 60px rgba(0,0,0,0.6);
-      position:relative;
+      box-shadow:0 20px 60px rgba(0,0,0,0.6);
     }
-    .header-grid{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
-    .title-block{min-width:0;flex:1}
-    h1{margin:0;font-size:1.95rem;color:var(--accent-text);font-weight:700;letter-spacing:0.2px}
-    .subtitle{margin:8px 0 0;color:var(--muted);font-size:0.98rem}
-    .header-actions{display:flex;gap:12px;align-items:center;margin-top:12px}
+
+    /* Left: name, subtitle, stats */
+    .hero{
+      min-width:0;
+    }
+    .name{
+      margin:0;color:#fff;font-size:1.9rem;font-weight:700;letter-spacing:0.2px;
+    }
+    .subtitle{margin:8px 0 14px;color:var(--muted);font-size:0.98rem;line-height:1.35}
+    .cta-row{display:flex;gap:12px;align-items:center;margin-bottom:12px}
     .btn{
       background:linear-gradient(90deg,var(--rose-mid),var(--rose-accent));
-      color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700;text-decoration:none;cursor:pointer;
-      box-shadow:0 10px 30px rgba(123,46,110,0.18);
+      color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+      box-shadow:0 10px 30px rgba(123,46,110,0.18)
     }
 
-    .stats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-    .stat{background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45));padding:10px 14px;border-radius:12px;border:1px solid rgba(255,127,191,0.03);min-width:120px;text-align:center}
+    .stats{display:flex;gap:12px;flex-wrap:wrap}
+    .stat{
+      background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5));
+      padding:10px 14px;border-radius:12px;border:1px solid rgba(255,127,191,0.03);min-width:120px;text-align:center
+    }
     .stat strong{display:block;color:#fff;font-size:1.12rem}
 
-    /* compact contact box near name (new placement) */
-    .contact-box{
-      position:absolute;right:22px;top:22px;width:300px;border-radius:12px;padding:12px;background:linear-gradient(180deg,var(--box-black), rgba(20,8,18,0.6));
-      border:1px solid rgba(255,127,191,0.06);box-shadow:0 18px 40px rgba(0,0,0,0.6);
-      display:flex;flex-direction:column;gap:8px;
+    /* Right: contact card (non-overlapping, responsive) */
+    .contact-card{
+      background:linear-gradient(180deg,var(--panel-dark), rgba(20,8,18,0.6));
+      border-radius:12px;padding:14px;border:1px solid rgba(255,127,191,0.06);
+      box-shadow:0 18px 40px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:10px;
+      align-self:start;
     }
-    .contact-box .row{display:flex;gap:12px;align-items:center}
-    .contact-box .label{width:90px;color:var(--rose-accent);font-weight:700}
-    .contact-box .value{color:var(--muted);font-size:0.95rem;word-break:break-word}
+    .contact-card h3{margin:0;color:var(--rose-accent);font-size:0.98rem}
+    .contact-row{display:flex;gap:12px;align-items:flex-start}
+    .contact-label{width:92px;color:var(--rose-accent);font-weight:700;font-size:0.92rem}
+    .contact-value{color:var(--muted);font-size:0.95rem;word-break:break-word}
 
-    /* Sections container */
-    .sections{display:flex;flex-direction:column;gap:28px;margin-top:18px}
+    /* Main sections: alternating boxed layout */
+    .sections{display:flex;flex-direction:column;gap:22px;margin-top:20px}
 
-    /* Alternating section layout */
     .section{
       display:grid;
       grid-template-columns:1fr 360px;
       gap:18px;
       align-items:start;
-      position:relative;
     }
     .section.right{grid-template-columns:360px 1fr}
-    @media (max-width:980px){
-      .section{grid-template-columns:1fr}
-      .section.right{grid-template-columns:1fr}
-      .contact-box{position:static;width:100%;order:2}
-    }
-
-    /* Panels */
     .panel{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:var(--card-radius);
-      padding:20px;
-      border:1px solid rgba(255,127,191,0.02);
-      box-shadow:0 18px 50px rgba(0,0,0,0.55);
-      transition:transform .6s cubic-bezier(.2,.9,.2,1), box-shadow .45s, opacity .45s;
-      transform-origin:center center;
-      will-change:transform,opacity;
+      border-radius:12px;padding:18px;border:1px solid rgba(255,127,191,0.02);
+      box-shadow:0 16px 40px rgba(0,0,0,0.55);
     }
+    .panel h2{margin:0 0 8px;color:#fff;font-size:1.08rem}
+    .panel p{margin:0;color:var(--muted);line-height:1.5}
 
-    .panel h2{margin:0 0 8px;color:#fff;font-size:1.12rem}
-    .panel p{margin:0;color:var(--muted)}
+    /* compact lists and grids */
+    .about-grid{display:grid;gap:10px;margin-top:12px}
+    .about-item{display:flex;justify-content:space-between;padding:10px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,127,191,0.02);color:var(--muted)}
 
-    .panel.side{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
-    .panel.side strong{color:#fff}
-    .panel.side .mini{background:var(--glass);padding:10px;border-radius:10px;width:100%;text-align:center;color:var(--muted);border:1px solid rgba(255,127,191,0.02)}
-
-    /* About list */
-    .about-list{display:grid;gap:8px;margin-top:12px}
-    .about-list div{display:flex;justify-content:space-between;padding:10px;border-radius:10px;background:rgba(255,255,255,0.01);color:var(--muted);border:1px solid rgba(255,127,191,0.02)}
-
-    /* Projects compact */
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-top:12px}
-    .project-card{
-      display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      border:1px solid rgba(255,127,191,0.02);transition:transform .45s, box-shadow .45s;cursor:default;
-    }
-    .project-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 30px 70px rgba(0,0,0,0.6)}
-    .project-logo{width:36px;height:36px;border-radius:6px;object-fit:cover;border:1px solid rgba(255,127,191,0.04)}
-    .project-title{display:flex;align-items:center;justify-content:space-between;width:100%}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:12px}
+    .project-card{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,127,191,0.02)}
+    .project-title{display:flex;justify-content:space-between;align-items:center;width:100%}
     .project-title h3{margin:0;color:#fff;font-size:1rem}
-    .project-desc{margin:6px 0 0;color:var(--muted);font-size:0.95rem}
-    .project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .tag{background:rgba(255,255,255,0.01);padding:6px 8px;border-radius:8px;font-size:0.82rem;color:var(--muted)}
+    .project-desc{margin-top:8px;color:var(--muted);font-size:0.95rem}
 
-    /* Timeline */
     .timeline{position:relative;padding-left:14px}
     .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--rose-mid),var(--rose-accent));border-radius:3px}
     .timeline-item{position:relative;margin:18px 0 18px 16px}
     .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--rose-accent)}
-    .role{font-weight:700;color:#fff}
     .company{font-weight:600;color:var(--muted);margin-bottom:6px}
-    .exp-list{margin:8px 0 0 16px;color:var(--muted)}
+    .role{font-weight:700;color:#fff}
 
-    /* Certifications */
-    .cert-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
-    .cert{width:160px;text-align:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,127,191,0.02)}
-    .cert img{width:88px;height:auto;display:block;margin:0 auto 8px}
-    .cert p{margin:6px 0 0;font-weight:700;color:#fff}
+    /* contact list inside contact section (neat alignment) */
+    .contact-grid{display:grid;grid-template-columns:140px 1fr;gap:8px 18px;align-items:center}
+    .contact-grid .label{color:#fff;font-weight:700}
+    .contact-grid .value{color:var(--muted);word-break:break-word}
 
-    /* Contact form */
-    .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
-    .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted)}
-    .contact-form button{display:inline-block;margin-top:8px;background:linear-gradient(90deg,var(--rose-mid),var(--rose-accent));color:#120617;padding:10px 14px;border-radius:10px;border:0;font-weight:700}
-
-    /* sliding & zoom helpers */
-    .slide-left{transform:translateX(-36px) scale(.98);opacity:.88}
-    .slide-right{transform:translateX(36px) scale(.98);opacity:.88}
-    .in-view{transform:translateX(0) scale(1);opacity:1;box-shadow:0 30px 70px rgba(0,0,0,0.6)}
-
+    /* responsive adjustments */
     @media (max-width:980px){
-      .projects-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-      .page{padding:16px}
+      header{grid-template-columns:1fr;position:relative}
+      .contact-card{position:static;width:100%}
+      .section,.section.right{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:120px 1fr}
+      .projects-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+      .contact-card{order:2}
     }
 
-    /* small utility */
-    a { color: var(--rose-accent); text-decoration: none; }
-    .muted { color: var(--muted); }
-    .accent-text { color: var(--accent-text); }
-    .label { font-weight:600;color:#fff;font-size:0.95rem }
+    @media (max-width:520px){
+      .name{font-size:1.5rem}
+      .contact-label{width:80px}
+      .contact-grid{grid-template-columns:1fr;gap:6px}
+      .contact-grid .label{font-size:0.95rem}
+    }
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .tag{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;color:var(--muted);font-size:0.82rem}
   </style>
 </head>
 <body>
-  <div class="glow-top" aria-hidden="true"></div>
-  <div class="glow-bottom" aria-hidden="true"></div>
-
   <div class="page">
     <header>
-      <div class="header-grid">
-        <div class="title-block">
-          <h1>LOORTHU KANISHTA D</h1>
-          <div class="subtitle">Python Developer | Machine Learning Engineer | AI Engineer | Data Scientist | LLM & RAG Specialist | Automation & DevOps</div>
+      <!-- Left: name, subtitle, CTA, stats -->
+      <div class="hero" aria-labelledby="hero-name">
+        <h1 id="hero-name" class="name">LOORTHU KANISHTA D</h1>
+        <div class="subtitle">Python Developer | Machine Learning Engineer | AI Engineer | Data Scientist | LLM & RAG Specialist | Automation & DevOps</div>
 
-          <div class="header-actions">
-            <a class="btn" href="#contact">Get in Touch</a>
-          </div>
-
-          <div class="stats" style="margin-top:12px;">
-            <div class="stat"><strong>2+</strong><span class="muted">Years Experience</span></div>
-            <div class="stat"><strong>25+</strong><span class="muted">Projects Delivered (office)</span></div>
-            <div class="stat"><strong>4</strong><span class="muted">Certifications</span></div>
-          </div>
+        <div class="cta-row">
+          <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
         </div>
 
-        <!-- Compact contact box placed near the name (removed contact lines from header body) -->
-        <div class="contact-box" aria-label="Primary contact details">
-          <div class="row"><div class="label">Email</div><div class="value">dloorthukanishta@gmail.com</div></div>
-          <div class="row"><div class="label">Location</div><div class="value">Chennai, India</div></div>
-          <div class="row"><div class="label">LinkedIn</div><div class="value"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div></div>
-          <div class="row"><div class="label">GitHub</div><div class="value"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div></div>
+        <div class="stats" role="list" aria-label="Key stats">
+          <div class="stat" role="listitem"><strong>2+</strong><div class="muted">Years Experience</div></div>
+          <div class="stat" role="listitem"><strong>25+</strong><div class="muted">Projects Delivered (office)</div></div>
+          <div class="stat" role="listitem"><strong>4</strong><div class="muted">Certifications</div></div>
         </div>
       </div>
+
+      <!-- Right: compact contact card (moved out of header body, non-overlapping) -->
+      <aside class="contact-card" aria-label="Primary contact details">
+        <h3>Contact</h3>
+
+        <div class="contact-row">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">dloorthukanishta@gmail.com</div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Chennai, India</div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
+        </div>
+      </aside>
     </header>
 
-    <div class="sections">
-
-      <!-- SUMMARY -->
-      <section class="section left slide-left" data-id="summary">
+    <main class="sections" id="main">
+      <!-- Summary -->
+      <section class="section left">
         <div class="panel content">
           <h2>SUMMARY</h2>
           <p>Versatile technology professional with expertise in Python development, machine learning, and applied AI systems. Skilled in building LLM-powered chatbots, RAG pipelines, and AI agent frameworks, with strong experience in automation, API development, and DevOps integration (CI/CD, Jenkins, ServiceNow, Splunk). Certified across AWS, Azure, and GCP, with proven ability to design, deploy, and optimize intelligent, production-grade solutions.</p>
+
+          <div class="about-grid">
+            <div class="about-item"><span>Name</span><strong>Loorthu Kanishta D</strong></div>
+            <div class="about-item"><span>Experience</span><strong>2+ Years</strong></div>
+            <div class="about-item"><span>Specialization</span><strong>AI Systems, Automation, Backend</strong></div>
+            <div class="about-item"><span>Email</span><strong>dloorthukanishta@gmail.com</strong></div>
+            <div class="about-item"><span>Location</span><strong>Chennai, India</strong></div>
+          </div>
         </div>
 
-        <aside class="panel side slide-right">
-          <strong>Core strengths</strong>
-          <div class="mini">Python development & backend APIs</div>
-          <div class="mini">LLMs, RAG, agent frameworks</div>
-          <div class="mini">Automation & DevOps (CI/CD, Jenkins)</div>
+        <aside class="panel side">
+          <strong style="color:#fff">Core strengths</strong>
+          <div class="muted" style="margin-top:8px">Python development, LLMs & RAG, automation, CI/CD, observability</div>
         </aside>
       </section>
 
-      <!-- WORK EXPERIENCE -->
-      <section class="section right slide-right" data-id="experience">
-        <aside class="panel side slide-left">
-          <strong>Work</strong>
-          <div class="mini">Tata Consultancy Services (TCS)</div>
-          <div class="mini">Python Developer | Automation Engineer | Application Tool Programmer</div>
-          <div class="mini">June 2024 — Present</div>
+      <!-- Projects -->
+      <section class="section right" id="projects">
+        <aside class="panel side">
+          <strong style="color:#fff">Project focus</strong>
+          <div class="muted" style="margin-top:8px">Automation · Chatbot · Audio ML · 25+ office projects</div>
         </aside>
 
-        <div class="panel content slide-right">
-          <h2>WORK EXPERIENCE</h2>
-          <p><strong>Tata Consultancy Services (TCS)</strong><br>Python Developer | Automation Engineer | Application Tool Programmer — June 2024</p>
+        <div class="panel content">
+          <h2>SELECTED PROJECTS</h2>
+          <p class="muted">Representative work showing end-to-end delivery, production readiness, and measurable impact.</p>
 
-          <div style="height:8px"></div>
-          <ul class="muted" style="margin:0 0 0 18px">
+          <div class="projects-grid" aria-live="polite">
+            <article class="project-card" aria-labelledby="p1">
+              <div style="flex:1">
+                <div class="project-title"><h3 id="p1">AI-Based Bird Sound Analysis System</h3><span class="muted">Audio ML</span></div>
+                <div class="project-desc">Built Python ML pipeline using MFCC + LSTM for species classification; deployed with a Bootstrap interface for biodiversity monitoring and serverless inference for batch processing.</div>
+                <div style="margin-top:8px"><span class="tag">Python</span> <span class="tag">Librosa</span> <span class="tag">PyTorch</span> <span class="tag">AWS Lambda</span></div>
+              </div>
+            </article>
+
+            <article class="project-card" aria-labelledby="p2">
+              <div style="flex:1">
+                <div class="project-title"><h3 id="p2">LLM-Powered Chatbot</h3><span class="muted">RAG · Conversational AI</span></div>
+                <div class="project-desc">Developed RAG pipelines and agent-based automation for enterprise conversational use cases; implemented prompt templates, safety filters, and Slack/ticketing integrations for automated triage.</div>
+                <div style="margin-top:8px"><span class="tag">Hugging Face</span> <span class="tag">FAISS</span> <span class="tag">FastAPI</span></div>
+              </div>
+            </article>
+
+            <article class="project-card" aria-labelledby="p3">
+              <div style="flex:1">
+                <div class="project-title"><h3 id="p3">TCS Automation — Incident Linking</h3><span class="muted">Runbook Automation</span></div>
+                <div class="project-desc">Converted manual runbook tasks into Python APIs and automation scripts; integrated with ServiceNow, Jenkins, and Splunk to automatically link related incidents and reduce manual effort.</div>
+                <div style="margin-top:8px"><span class="tag">Django</span> <span class="tag">ServiceNow</span> <span class="tag">Splunk</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="section left">
+        <div class="panel content">
+          <h2>WORK EXPERIENCE</h2>
+          <p class="muted"><strong>Tata Consultancy Services (TCS)</strong><br>Python Developer | Automation Engineer | Application Tool Programmer — June 2024</p>
+          <ul class="muted" style="margin:12px 0 0 18px">
             <li>Developed Python automation scripts integrating ServiceNow, Splunk, Jenkins, and Git to streamline enterprise workflows.</li>
             <li>Designed and deployed RESTful APIs with Django for data exchange and ML workflow orchestration.</li>
             <li>Built and maintained CI/CD pipelines ensuring automated testing and reliable deployment.</li>
             <li>Applied LLM models, RAG pipelines, and AI agents to create intelligent chatbot applications.</li>
-            <li>Automated ticketing and monitoring workflows via ServiceNow and Splunk.</li>
-            <li>Conducted data preprocessing, feature engineering, and ML experimentation for predictive insights.</li>
-            <li>Implemented web scraping solutions to support model training datasets.</li>
             <li>Recognized with Certificate of Appreciation and Xcelerate Warrior Award for technical excellence.</li>
           </ul>
         </div>
-      </section>
 
-      <!-- EDUCATION -->
-      <section class="section left slide-left" data-id="education">
-        <div class="panel content">
-          <h2>EDUCATION</h2>
-          <p><strong>PET Engineering College, Anna University</strong><br>Master of Computer Applications (MCA) — 9.35 CGPA (2021–2023)</p>
-          <div style="height:8px"></div>
-          <p><strong>Govt. Arts & Science College for Women, MS University</strong><br>B.Sc. Computer Science — 9.50 CGPA (2018–2021)</p>
-        </div>
-
-        <aside class="panel side slide-right">
-          <strong>Honors</strong>
-          <div class="mini">High academic performance across degrees</div>
+        <aside class="panel side">
+          <strong style="color:#fff">Roles</strong>
+          <div class="muted" style="margin-top:8px">AI Software Engineer; Automation Tool Programmer; Python Developer</div>
         </aside>
       </section>
 
-      <!-- PROJECTS -->
-      <section class="section right slide-right" id="projects">
-        <aside class="panel side slide-left">
-          <strong>Project focus</strong>
-          <div class="mini">Automation · Chatbot · Audio ML</div>
-          <div class="mini">25+ office projects (summary available on request)</div>
+      <!-- Skills -->
+      <section class="section right">
+        <aside class="panel side">
+          <strong style="color:#fff">Tools & Frameworks</strong>
+          <div class="muted" style="margin-top:8px">Python · PyTorch · TensorFlow · Hugging Face · SageMaker · Docker · Kubernetes</div>
         </aside>
 
-        <div class="panel content slide-right">
-          <h2>PROJECTS</h2>
-          <p>Representative work showing end-to-end delivery, production readiness, and measurable impact. (Three highlighted projects below.)</p>
-
-          <div class="projects-grid" style="margin-top:12px;">
-            <!-- Bird Sound -->
-            <article class="project-card slide-left">
-              <img class="project-logo" src="images/bird_waveform.png" alt="Bird sound logo" />
-              <div style="flex:1">
-                <div class="project-title"><h3>AI-Based Bird Sound Analysis System</h3><span class="muted">Audio ML</span></div>
-                <div class="project-desc">Built Python ML pipeline using MFCC + LSTM for species classification; deployed with a Bootstrap interface for biodiversity monitoring and serverless inference for batch processing.</div>
-                <div class="project-tags"><span class="tag">Python</span><span class="tag">Librosa</span><span class="tag">PyTorch</span><span class="tag">AWS Lambda</span></div>
-              </div>
-            </article>
-
-            <!-- LLM Chatbot -->
-            <article class="project-card slide-left">
-              <img class="project-logo" src="images/project_chatbot_thumb.png" alt="LLM chatbot logo" />
-              <div style="flex:1">
-                <div class="project-title"><h3>LLM-Powered Chatbot</h3><span class="muted">RAG · Conversational AI</span></div>
-                <div class="project-desc">Developed RAG pipelines and agent-based automation for enterprise conversational use cases; implemented prompt templates, safety filters, and Slack/ticketing integrations for automated triage.</div>
-                <div class="project-tags"><span class="tag">Hugging Face</span><span class="tag">FAISS</span><span class="tag">FastAPI</span><span class="tag">Docker</span></div>
-              </div>
-            </article>
-
-            <!-- Automation -->
-            <article class="project-card slide-left">
-              <img class="project-logo" src="images/aws_ml_specialty.png" alt="Automation logo" />
-              <div style="flex:1">
-                <div class="project-title"><h3>TCS Automation — Incident Linking</h3><span class="muted">Runbook Automation</span></div>
-                <div class="project-desc">Converted manual runbook tasks into Python APIs and automation scripts; integrated with ServiceNow, Jenkins, and Splunk to automatically link related incidents and reduce manual effort.</div>
-                <div class="project-tags"><span class="tag">Django</span><span class="tag">ServiceNow</span><span class="tag">Splunk</span><span class="tag">Jenkins</span></div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- SKILLS -->
-      <section class="section left slide-left" data-id="skills">
         <div class="panel content">
           <h2>SKILLS</h2>
-          <p>Practical, production-focused skills across ML, backend engineering, and cloud infrastructure.</p>
-
-          <div style="height:12px"></div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
-            <div style="background:var(--panel);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px">
+            <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
               <strong style="color:#fff">Core</strong>
               <div class="muted" style="margin-top:8px">Python, SQL, Django, REST APIs</div>
             </div>
-
-            <div style="background:var(--panel);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
+            <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
               <strong style="color:#fff">ML & AI</strong>
               <div class="muted" style="margin-top:8px">Machine Learning, Deep Learning, LLMs, RAG, AI Agents</div>
             </div>
-
-            <div style="background:var(--panel);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
+            <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
+              <strong style="color:#fff">DevOps</strong>
+              <div class="muted" style="margin-top:8px">CI/CD, Jenkins, Git, ServiceNow, Splunk</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
               <strong style="color:#fff">Cloud</strong>
               <div class="muted" style="margin-top:8px">AWS, Azure, GCP</div>
             </div>
-
-            <div style="background:var(--panel);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
-              <strong style="color:#fff">DevOps & Tools</strong>
-              <div class="muted" style="margin-top:8px">CI/CD, Jenkins, Git, ServiceNow, Splunk, Docker, Kubernetes</div>
-            </div>
-
-            <div style="background:var(--panel);padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.02)">
-              <strong style="color:#fff">Data</strong>
-              <div class="muted" style="margin-top:8px">Feature engineering, preprocessing, web scraping, MySQL, SQLite</div>
-            </div>
-          </div>
-        </div>
-
-        <aside class="panel side slide-right">
-          <strong>Tools & Frameworks</strong>
-          <div class="mini">Python · PyTorch · TensorFlow · Hugging Face</div>
-          <div class="mini">SageMaker · Docker · Kubernetes · Postgres</div>
-        </aside>
-      </section>
-
-      <!-- DETAILED EXPERIENCE -->
-      <section class="section right slide-right" data-id="timeline">
-        <aside class="panel side slide-left">
-          <strong>Highlights</strong>
-          <div class="mini">RAG pipelines, agent frameworks, automation</div>
-          <div class="mini">Production deployments & observability</div>
-        </aside>
-
-        <div class="panel content slide-right">
-          <h2>DETAILED EXPERIENCE</h2>
-          <div style="height:12px"></div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="company">Tata Consultancy Services</div>
-              <div class="role">AI Software Engineer — Feb 2026 - Present (Full-time)</div>
-              <div class="exp-list">
-                <ul>
-                  <li>Design and develop production-grade chatbot applications using Python and LLMs; own architecture, prompt design, and safety controls.</li>
-                  <li>Implement RAG pipelines with vector stores and chunking strategies; improved retrieval accuracy in pilots.</li>
-                  <li>Build agentic frameworks to orchestrate multi-step tasks across systems (ticket creation, data lookup, remediation).</li>
-                  <li>Lead model evaluation and monitoring: latency budgets, throughput testing, drift detection alerts.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="company">Tata Consultancy Services</div>
-              <div class="role">Automation Tool Programmer — Jan 2025 - Feb 2026 (Full-time)</div>
-              <div class="exp-list">
-                <ul>
-                  <li>Automated incident linking by converting manual runbook tasks into Python APIs and scheduled jobs.</li>
-                  <li>Integrated ServiceNow, Jenkins, and internal tools for end-to-end automation and observability.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="company">Tata Consultancy Services</div>
-              <div class="role">Python Developer — Jun 2024 - Jan 2025 (On-site, Chennai)</div>
-              <div class="exp-list">
-                <ul>
-                  <li>Built backend automation scripts and APIs (Django/REST) to streamline enterprise operations.</li>
-                  <li>Implemented CI/CD pipelines and tests to ensure reliable deployments.</li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      <!-- CERTIFICATIONS -->
-      <section class="section left slide-left" data-id="certifications">
+      <!-- Certifications -->
+      <section class="section left">
         <div class="panel content">
           <h2>CERTIFICATIONS</h2>
-          <p>Cloud and AI badges (images only).</p>
-
-          <div class="cert-grid">
-            <div class="cert">
-              <img src="images/aws_ml_specialty.png" alt="AWS ML Specialty" />
-              <p>AWS Certified Machine Learning — Specialty</p>
-            </div>
-
-            <div class="cert">
-              <img src="images/aws_ml_associate.png" alt="AWS ML Associate" />
-              <p>AWS Certified Machine Learning — Associate</p>
-            </div>
-
-            <div class="cert">
-              <img src="images/azure_ai_engineer.png" alt="Azure AI Engineer" />
-              <p>Microsoft Certified: Azure AI Engineer Associate (AI-102)</p>
-            </div>
-
-            <div class="cert">
-              <img src="images/gcp_cloud_developer.png" alt="GCP Cloud Developer" />
-              <p>Google Cloud Professional Cloud Developer</p>
-            </div>
-          </div>
+          <div class="muted" style="margin-top:8px">AWS Certified Machine Learning — Specialty; AWS Certified Machine Learning — Associate; Microsoft Certified: Azure AI Engineer Associate (AI-102); Google Cloud Professional Cloud Developer</div>
         </div>
 
-        <aside class="panel side slide-right">
-          <strong>Certs</strong>
-          <div class="mini">AWS · Azure · GCP</div>
+        <aside class="panel side">
+          <strong style="color:#fff">Badges</strong>
+          <div class="muted" style="margin-top:8px">AWS · Azure · GCP</div>
         </aside>
       </section>
 
-      <!-- CONTACT (form + repeat neat list) -->
-      <section class="section right slide-right" id="contact">
-        <aside class="panel side slide-left">
-          <strong>Reach out</strong>
-          <div class="mini">Available for daytime, full-time roles</div>
-          <div class="mini">Share a brief about your project and I'll respond promptly</div>
+      <!-- Contact section (neat aligned list + form) -->
+      <section class="section right" id="contact">
+        <aside class="panel side">
+          <strong style="color:#fff">Reach out</strong>
+          <div class="muted" style="margin-top:8px">Available for daytime, full-time roles. Share a brief about your project and I'll respond promptly.</div>
         </aside>
 
-        <div class="panel content slide-right">
+        <div class="panel content">
           <h2>CONTACT</h2>
-          <p>I'm open to full-time roles and collaborations. Available for daytime, full-time positions — share a brief about your project or role and I'll respond promptly.</p>
+          <p class="muted">Neatly aligned contact details for quick copy or click.</p>
 
           <div style="height:12px"></div>
+          <div class="contact-grid" aria-label="Contact details">
+            <div class="label">Email</div>
+            <div class="value">dloorthukanishta@gmail.com</div>
 
-          <!-- Neat aligned contact block (repeat for visibility) -->
-          <div style="margin-bottom:12px;display:grid;grid-template-columns:140px 1fr;gap:8px 18px;align-items:center">
-            <div style="color:#fff;font-weight:700">Email</div>
-            <div style="color:var(--muted)">dloorthukanishta@gmail.com</div>
+            <div class="label">Location</div>
+            <div class="value">Chennai, India</div>
 
-            <div style="color:#fff;font-weight:700">Location</div>
-            <div style="color:var(--muted)">Chennai, India</div>
+            <div class="label">LinkedIn</div>
+            <div class="value"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
 
-            <div style="color:#fff;font-weight:700">LinkedIn</div>
-            <div style="color:var(--muted)"><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">loorthu-kanishta-d-a7ba41325</a></div>
-
-            <div style="color:#fff;font-weight:700">GitHub</div>
-            <div style="color:var(--muted)"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
+            <div class="label">GitHub</div>
+            <div class="value"><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">loorthu-kanishta-d</a></div>
           </div>
 
-          <form class="contact-form" onsubmit="handleContact(event)">
-            <input type="text" id="name" placeholder="Your Name" required />
-            <input type="email" id="email" placeholder="Email Address" required />
-            <input type="text" id="subject" placeholder="Subject" />
-            <textarea id="message" rows="5" placeholder="Write your message..." required></textarea>
-            <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
-              <button type="submit" class="contact-btn btn">Send Message</button>
-              <div style="color:var(--muted);font-size:0.92rem">I'll reply promptly to daytime, full-time role inquiries.</div>
+          <div style="height:14px"></div>
+
+          <form class="contact-form" onsubmit="handleContact(event)" aria-label="Contact form">
+            <input type="text" id="name" placeholder="Your Name" required style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted);margin-bottom:8px" />
+            <input type="email" id="email" placeholder="Email Address" required style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted);margin-bottom:8px" />
+            <input type="text" id="subject" placeholder="Subject" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted);margin-bottom:8px" />
+            <textarea id="message" rows="5" placeholder="Write your message..." required style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,127,191,0.06);background:rgba(255,255,255,0.01);color:var(--muted);margin-bottom:8px"></textarea>
+
+            <div style="display:flex;gap:10px;align-items:center">
+              <button type="submit" class="btn">Send Message</button>
+              <div class="muted" style="font-size:0.92rem">I'll reply promptly to daytime, full-time role inquiries.</div>
             </div>
           </form>
         </div>
       </section>
-
-    </div> <!-- sections -->
+    </main>
 
     <footer style="margin-top:28px;text-align:center;color:var(--muted)">
       <small>&copy; <span id="year"></span> Loorthu Kanishta D — All rights reserved.</small>
@@ -488,24 +356,10 @@
   </div>
 
   <script>
-    // IntersectionObserver to add in-view classes for sliding/zoom
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        const el = entry.target;
-        if(entry.isIntersecting){
-          el.classList.add('in-view');
-        } else {
-          el.classList.remove('in-view');
-        }
-      });
-    }, {threshold:0.28});
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Observe panels, sections and project cards
-    document.querySelectorAll('.panel, .project-card, .section').forEach(el=>{
-      observer.observe(el);
-    });
-
-    // Contact demo handler
+    // simple contact demo handler
     function handleContact(e){
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
@@ -516,8 +370,8 @@
       e.target.reset();
     }
 
-    // set year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Accessibility: ensure contact card doesn't overlap on small screens (handled by CSS grid)
+    // No additional JS required for layout; CSS grid and media queries handle responsiveness.
   </script>
 </body>
 </html>
