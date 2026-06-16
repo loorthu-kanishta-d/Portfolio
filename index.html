@@ -10,9 +10,9 @@
 
   <style>
     :root{
-      --accent-1:#6EE7B7;   /* mint */
-      --accent-2:#7C3AED;   /* violet */
-      --bg:#0f1724;         /* deep navy */
+      --accent-a:#2dd4bf;   /* teal */
+      --accent-b:#7c3aed;   /* violet */
+      --bg:#071428;         /* deep navy */
       --card:#071428;       /* card dark */
       --muted:#9aa6b2;
       --glass: rgba(255,255,255,0.03);
@@ -36,10 +36,10 @@
       padding:64px 20px;
       text-align:left;
       background:
-        radial-gradient(800px 300px at 10% 10%, rgba(124,58,237,0.08), transparent 10%),
-        radial-gradient(700px 260px at 90% 80%, rgba(110,231,183,0.06), transparent 12%),
+        radial-gradient(800px 300px at 10% 10%, rgba(124,58,237,0.06), transparent 10%),
+        radial-gradient(700px 260px at 90% 80%, rgba(45,212,191,0.05), transparent 12%),
         linear-gradient(180deg,#071428 0%, #071a2a 100%);
-      color:var(--accent-1);
+      color:var(--accent-a);
       position:relative;
       overflow:hidden;
     }
@@ -56,7 +56,7 @@
     header p{margin:0 0 14px; color:var(--muted); font-size:1.05rem}
     .hero-cta{display:flex; gap:12px; align-items:center}
     .btn{
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
       color:#071428; border:0; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer;
       box-shadow:0 8px 30px rgba(124,58,237,0.12);
       text-decoration:none;
@@ -100,7 +100,7 @@
     /* About split layout */
     .about-grid{display:grid; grid-template-columns:1fr 380px; gap:22px; align-items:center}
     .about-avatar{
-      height:360px; border-radius:12px; background:linear-gradient(135deg,var(--accent-2),#2dd4bf);
+      height:360px; border-radius:12px; background:linear-gradient(135deg,var(--accent-b),#2dd4bf);
       display:flex; align-items:center; justify-content:center; color:#071428; font-weight:800; font-size:1.05rem;
       box-shadow:0 18px 50px rgba(124,58,237,0.12);
       position:relative; overflow:hidden;
@@ -124,7 +124,7 @@
     }
     .skill strong{display:block; margin-bottom:8px; color:#e6fff6}
     .progress{height:10px; background:rgba(255,255,255,0.03); border-radius:999px; overflow:hidden}
-    .progress > i{display:block; height:100%; background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); width:0%; transition:width 1.2s ease}
+    .progress > i{display:block; height:100%; background:linear-gradient(90deg,var(--accent-a),var(--accent-b)); width:0%; transition:width 1.2s ease}
 
     /* Services */
     .services-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px}
@@ -137,16 +137,16 @@
       padding:16px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
       box-shadow:0 12px 36px rgba(2,6,23,0.45)
     }
-    .project .meta{min-width:120px; font-weight:800; color:var(--accent-1)}
+    .project .meta{min-width:120px; font-weight:800; color:var(--accent-a)}
 
     .tech-list{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
     .tech{background:rgba(255,255,255,0.03); padding:6px 8px; border-radius:8px; font-size:0.85rem; color:var(--muted)}
 
     /* Experience timeline */
     .timeline{position:relative; padding-left:18px}
-    .timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--accent-1),var(--accent-2)); border-radius:3px}
+    .timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--accent-a),var(--accent-b)); border-radius:3px}
     .timeline-item{position:relative; margin:22px 0 22px 18px}
-    .timeline-item::before{content:""; position:absolute; left:-26px; top:6px; width:14px; height:14px; border-radius:50%; background:#071428; border:4px solid var(--accent-2)}
+    .timeline-item::before{content:""; position:absolute; left:-26px; top:6px; width:14px; height:14px; border-radius:50%; background:#071428; border:4px solid var(--accent-b)}
 
     .role{font-weight:800; color:#e6fff6}
     .company{font-weight:700; color:var(--muted); margin-bottom:6px}
@@ -194,7 +194,7 @@
         <p>AI Engineer · Python Developer · ML Engineer · Data Scientist — building production ML systems, LLM assistants, and automation that scale.</p>
 
         <div class="hero-cta">
-          <a class="btn" href="Loorthu_Kanishta_Resume.pdf" download>Download Resume</a>
+          <a class="btn" href="main/images/Loorthu_Kanishta_Resume.pdf" download>Download Resume</a>
           <a class="btn secondary" href="#contact">Get in Touch</a>
         </div>
 
@@ -225,9 +225,9 @@
 
     <!-- decorative floating icons (placeholders) -->
     <div class="float-icons" aria-hidden="true">
-      <i style="background:radial-gradient(circle,#7C3AED,#6EE7B7); border-radius:8px;"></i>
-      <i style="background:radial-gradient(circle,#6EE7B7,#7C3AED); border-radius:8px;"></i>
-      <i style="background:radial-gradient(circle,#7C3AED,#6EE7B7); border-radius:8px;"></i>
+      <i style="background:radial-gradient(circle,var(--accent-b),var(--accent-a)); border-radius:8px;"></i>
+      <i style="background:radial-gradient(circle,var(--accent-a),var(--accent-b)); border-radius:8px;"></i>
+      <i style="background:radial-gradient(circle,var(--accent-b),var(--accent-a)); border-radius:8px;"></i>
     </div>
   </header>
 
@@ -381,6 +381,9 @@
               <div class="tech-list">
                 <span class="tech">Python</span><span class="tech">Librosa</span><span class="tech">PyTorch</span><span class="tech">AWS Lambda</span>
               </div>
+              <div style="margin-top:10px">
+                <img src="main/images/bird_waveform.png" alt="Bird sound waveform thumbnail" style="width:100%; border-radius:8px; max-width:520px" />
+              </div>
             </div>
           </div>
 
@@ -391,6 +394,9 @@
               <p style="margin:6px 0">Designed a RAG pipeline using vector search and chunked documents to provide accurate answers from internal knowledge bases. Implemented prompt templates, safety filters, and a feedback loop to improve retrieval quality. Integrated with Slack and internal ticketing systems for automated triage.</p>
               <div class="tech-list">
                 <span class="tech">Hugging Face</span><span class="tech">FAISS</span><span class="tech">FastAPI</span><span class="tech">Docker</span>
+              </div>
+              <div style="margin-top:10px">
+                <img src="main/images/project_chatbot_thumb.png" alt="LLM chatbot project thumbnail" style="width:100%; border-radius:8px; max-width:520px" />
               </div>
             </div>
           </div>
@@ -413,6 +419,9 @@
               <p style="margin:6px 0">Contributed to UI/UX and API integration for a mobile portfolio app supporting real-time portfolio monitoring, transaction history, and secure authentication. Implemented offline caching and optimized network usage for mobile performance.</p>
               <div class="tech-list">
                 <span class="tech">React Native</span><span class="tech">Expo</span><span class="tech">REST</span><span class="tech">SQLite</span>
+              </div>
+              <div style="margin-top:10px">
+                <img src="main/images/project_wealth_thumb.png" alt="Wealth management app thumbnail" style="width:100%; border-radius:8px; max-width:520px" />
               </div>
             </div>
           </div>
@@ -483,31 +492,31 @@
         <div class="cert-grid">
 
           <div class="cert" data-aos="fade-up" data-aos-delay="80">
-            <!-- store image as: aws_ml_specialty.png -->
-            <img src="aws_ml_specialty.png" alt="AWS ML Specialty Badge" />
+            <!-- Save image as: main/images/aws_ml_specialty.png -->
+            <img src="main/images/aws_ml_specialty.png" srcset="main/images/aws_ml_specialty@2x.png 2x" alt="AWS ML Specialty badge" />
             <p>AWS Certified Machine Learning — Specialty</p>
-            <a href="AWS_ML_Specialty_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
+            <a href="main/images/AWS_ML_Specialty_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
           <div class="cert" data-aos="fade-up" data-aos-delay="160">
-            <!-- store image as: aws_ml_associate.png -->
-            <img src="aws_ml_associate.png" alt="AWS ML Associate Badge" />
+            <!-- Save image as: main/images/aws_ml_associate.png -->
+            <img src="main/images/aws_ml_associate.png" srcset="main/images/aws_ml_associate@2x.png 2x" alt="AWS ML Associate badge" />
             <p>AWS Certified Machine Learning — Associate</p>
-            <a href="AWS_ML_Associate_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
+            <a href="main/images/AWS_ML_Associate_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
           <div class="cert" data-aos="fade-up" data-aos-delay="240">
-            <!-- store image as: azure_ai_engineer.png -->
-            <img src="azure_ai_engineer.png" alt="Azure AI Engineer Badge" />
+            <!-- Save image as: main/images/azure_ai_engineer.png -->
+            <img src="main/images/azure_ai_engineer.png" srcset="main/images/azure_ai_engineer@2x.png 2x" alt="Azure AI Engineer badge" />
             <p>Microsoft Certified: Azure AI Engineer Associate</p>
-            <a href="Azure_AI_Engineer_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
+            <a href="main/images/Azure_AI_Engineer_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
           <div class="cert" data-aos="fade-up" data-aos-delay="320">
-            <!-- store image as: gcp_cloud_developer.png -->
-            <img src="gcp_cloud_developer.png" alt="GCP Cloud Developer Badge" />
+            <!-- Save image as: main/images/gcp_cloud_developer.png -->
+            <img src="main/images/gcp_cloud_developer.png" srcset="main/images/gcp_cloud_developer@2x.png 2x" alt="GCP Cloud Developer badge" />
             <p>Google Cloud Professional Cloud Developer</p>
-            <a href="GCP_Cloud_Developer_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
+            <a href="main/images/GCP_Cloud_Developer_Certificate.pdf" download class="btn" style="display:inline-block;margin-top:8px">Download Certificate</a>
           </div>
 
         </div>
@@ -526,8 +535,8 @@
             <p style="margin:6px 0"><strong>Email</strong><br>dloorthukanishta@gmail.com</p>
             <p style="margin:6px 0"><strong>Phone</strong><br>+91 9150108849</p>
             <p style="margin:6px 0"><strong>Location</strong><br>Tamil Nadu, India</p>
-            <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--accent-1)">linkedin.com/in/loorthu-kanishta-d</a></p>
-            <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--accent-1)">github.com/loorthu-kanishta-d</a></p>
+            <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener" style="color:var(--accent-a)">linkedin.com/in/loorthu-kanishta-d</a></p>
+            <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener" style="color:var(--accent-a)">github.com/loorthu-kanishta-d</a></p>
           </div>
 
           <div>
