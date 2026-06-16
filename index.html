@@ -1,206 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loorthu Kanishta D - Tech Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loorthu Kanishta D — Tech Portfolio</title>
+
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
   <style>
-    /* Global Styles */
-    body {
+    :root{
+      --accent:#0078d7;
+      --bg-light:#e6f2ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --glass: rgba(255,255,255,0.06);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
       margin:0;
-      font-family:'Source Code Pro', monospace;
-      background:#e6f2ff;
-      color:#222;
-      transition:background 0.5s ease;
+      font-family: "Inter", "Source Code Pro", monospace, system-ui, -apple-system;
+      background:var(--bg-light);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
+      transition:background .4s,color .4s;
     }
-    h1,h2,h3 { margin:0; font-weight:600; }
-    a { color:#0078d7; text-decoration:none; }
-    a:hover { text-decoration:underline; }
 
-    /* Header */
-    header {
-      background:linear-gradient(135deg,#66ccff,#003366);
-      color:#fff;
+    /* Header / Nav */
+    header{
+      padding:56px 20px;
       text-align:center;
-      padding:60px 20px;
+      background:linear-gradient(135deg,#66ccff 0%,#003366 100%);
+      color:#fff;
+      position:relative;
+      overflow:hidden;
     }
-    header h1 { font-size:2.5em; }
-    header p { font-size:1.2em; margin-top:10px; }
+    header .hero{
+      max-width:1100px;
+      margin:0 auto;
+    }
+    header h1{font-size:2.4rem; margin:0 0 8px; letter-spacing:0.6px}
+    header p{margin:0 0 18px; opacity:0.95}
+    nav{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:18px}
+    nav a{color:#fff; text-decoration:none; font-weight:600; padding:8px 12px; border-radius:8px; transition:background .2s}
+    nav a:hover{background:rgba(255,255,255,0.06)}
 
-    /* Navigation */
-    nav { margin-top:20px; }
-    nav a { margin:0 15px; font-weight:500; color:#fff; }
+    /* Theme buttons + resume */
+    .controls{display:flex; gap:10px; justify-content:center; margin-top:18px; flex-wrap:wrap}
+    .controls button, .controls a button{
+      background:#fff; color:#003366; border:0; padding:10px 14px; border-radius:8px; cursor:pointer; font-weight:700;
+    }
+    .controls button:hover{background:var(--accent); color:#fff}
 
     /* Sections */
-    section { max-width:1000px; margin:40px auto; padding:20px; }
-    .card {
-      background:#fff;
-      padding:25px;
-      border-radius:10px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
-      margin-bottom:30px;
-      transition:transform 0.3s, opacity 0.5s;
-      opacity:0;
-      animation: fadeInUp 1s forwards;
+    main{max-width:1100px; margin:28px auto; padding:0 20px 80px}
+    section{margin:36px 0; position:relative}
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:22px;
+      box-shadow:0 8px 30px rgba(2,6,23,0.06);
+      transition:transform .35s, box-shadow .35s;
+      overflow:hidden;
     }
-    .card:hover { transform:translateY(-5px); }
+    .card:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(2,6,23,0.09)}
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity:0; transform:translateY(20px); }
-      to { opacity:1; transform:translateY(0); }
+    h2{font-size:1.25rem; margin-bottom:12px}
+    p{line-height:1.5; color:var(--muted)}
+
+    /* About split layout */
+    .about-grid{display:grid; grid-template-columns:1fr 360px; gap:22px; align-items:center}
+    .about-avatar{
+      height:320px; border-radius:12px; background:linear-gradient(135deg,#0ea5e9,#7dd3fc);
+      display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:1.1rem;
+      box-shadow:0 10px 30px rgba(2,6,23,0.08);
     }
+    .about-list{display:grid; gap:8px; margin-top:12px}
+    .about-list div{display:flex; justify-content:space-between; padding:8px 10px; border-radius:8px; background:rgba(0,0,0,0.03)}
+
+    /* Skills */
+    .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px}
+    .skill{
+      padding:12px; border-radius:10px; background:linear-gradient(180deg,#fff,#f7fbff); text-align:center;
+      box-shadow:0 6px 18px rgba(2,6,23,0.04)
+    }
+    .skill strong{display:block; margin-bottom:6px}
+    .progress{height:8px; background:#e6eef9; border-radius:999px; overflow:hidden}
+    .progress > i{display:block; height:100%; background:linear-gradient(90deg,var(--accent),#00b4d8); width:0%; transition:width 1s ease}
+
+    /* Services */
+    .services-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px}
+    .service{padding:18px; border-radius:12px; background:linear-gradient(180deg,#fff,#f6fbff); text-align:left}
+
+    /* Projects carousel-like stack */
+    .projects-stack{display:grid; gap:14px}
+    .project{
+      display:flex; gap:14px; align-items:flex-start;
+      padding:14px; border-radius:10px; background:linear-gradient(180deg,#fff,#f8fbff);
+      box-shadow:0 8px 24px rgba(2,6,23,0.04)
+    }
+    .project .meta{min-width:120px; font-weight:700; color:var(--accent)}
+
+    /* Experience timeline */
+    .timeline{position:relative; padding-left:18px}
+    .timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--accent),#00b4d8); border-radius:3px}
+    .timeline-item{position:relative; margin:18px 0 18px 18px}
+    .timeline-item::before{content:""; position:absolute; left:-26px; top:6px; width:14px; height:14px; border-radius:50%; background:#fff; border:4px solid var(--accent)}
+
+    /* Certifications */
+    .cert-grid{display:flex; flex-wrap:wrap; gap:18px; justify-content:center}
+    .cert{
+      width:220px; text-align:center; padding:14px; border-radius:12px; background:linear-gradient(180deg,#fff,#f7fbff);
+      box-shadow:0 10px 30px rgba(2,6,23,0.06)
+    }
+    .cert img{width:110px; height:auto; display:block; margin:0 auto 10px; animation:fadeIn .9s ease both}
+    .cert p{margin:6px 0 10px; font-weight:700}
+
+    /* Contact */
+    .contact-grid{display:grid; grid-template-columns:1fr 360px; gap:18px}
+    .contact-form input, .contact-form textarea{
+      width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #e6eef9; background:#fff;
+    }
+    .contact-form button{display:inline-block}
 
     /* Footer */
-    footer {
-      background:#222;
-      color:#fff;
-      text-align:center;
-      padding:20px;
-      margin-top:40px;
+    footer{padding:22px 20px; text-align:center; color:#fff; background:#0b1220; margin-top:40px}
+
+    /* Dark theme */
+    body.dark{
+      background:#071025; color:#e6eef9;
+    }
+    body.dark header{background:linear-gradient(135deg,#001f3f,#001022)}
+    body.dark .card{background:#071428; color:#e6eef9}
+    body.dark nav a{color:#dbeafe}
+    body.dark .controls button{background:#0b1220; color:#dbeafe; border:1px solid rgba(255,255,255,0.04)}
+    body.dark .skill{background:linear-gradient(180deg,#071428,#021428)}
+    body.dark .service{background:linear-gradient(180deg,#071428,#021428)}
+    body.dark .project{background:linear-gradient(180deg,#071428,#021428)}
+    body.dark .cert{background:linear-gradient(180deg,#071428,#021428)}
+
+    @media (max-width:980px){
+      .about-grid, .contact-grid{grid-template-columns:1fr}
+      header h1{font-size:1.8rem}
+      .about-avatar{height:260px}
     }
 
-    /* Theme Patterns */
-    .solid { background:#e6f2ff; }
-    .grid {
-      background: radial-gradient(#cce6ff 1px, transparent 1px);
-      background-size: 20px 20px;
+    @keyframes fadeIn {
+      from{opacity:0; transform:scale(.95)}
+      to{opacity:1; transform:scale(1)}
     }
-    .striped {
-      background: repeating-linear-gradient(
-        45deg,
-        #e6f2ff,
-        #e6f2ff 20px,
-        #cce6ff 20px,
-        #cce6ff 40px
-      );
-    }
-    .dark {
-      background:#111;
-      color:#eee;
-    }
-    .dark .card { background:#222; color:#eee; }
-    .dark header { background:linear-gradient(135deg,#003366,#000); }
-
-    /* Responsive Design */
-    @media (max-width:768px) {
-      header h1 { font-size:1.8em; }
-      header p { font-size:1em; }
-      nav a { display:block; margin:10px 0; }
-      section { padding:10px; }
-    }
-
-    /* Buttons */
-    button {
-      margin:5px;
-      padding:10px 15px;
-      border:none;
-      border-radius:5px;
-      background:#fff;
-      color:#003366;
-      font-weight:bold;
-      cursor:pointer;
-    }
-    button:hover { background:#0078d7; color:#fff; }
   </style>
 </head>
 <body class="solid">
 
-<header>
-  <h1>Loorthu Kanishta D</h1>
-  <p>Python Developer | AI Engineer | ML Engineer | Data Scientist</p>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div style="margin-top:20px;">
-    <button onclick="switchTheme('solid')">Solid Blue</button>
-    <button onclick="switchTheme('grid')">Grid Pattern</button>
-    <button onclick="switchTheme('striped')">Striped</button>
-    <button onclick="switchTheme('dark')">Dark Mode</button>
-  </div>
-</header>
+  <!-- Header / Hero -->
+  <header data-aos="fade-down" data-aos-duration="900">
+    <div class="hero">
+      <h1>Loorthu Kanishta D</h1>
+      <p>Python Developer · AI Engineer · ML Engineer · Data Scientist</p>
 
-<section id="about">
-  <div class="card">
-    <h2>About Me</h2>
-    <p>Passionate Python Developer & AI Engineer specializing in automation, applied machine learning, and agentic AI systems. Skilled in building LLM-powered chatbots, RAG pipelines, and intelligent automation frameworks. Certified across AWS, Azure, and GCP, with proven ability to design and deploy production-grade solutions.</p>
-  </div>
-</section>
+      <nav aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-<section id="skills">
-  <div class="card">
-    <h2>Core Skills</h2>
-    <ul>
-      <li>Python, SQL, Django, REST APIs</li>
-      <li>Machine Learning, Deep Learning, LLMs, RAG, AI Agents</li>
-      <li>Automation & DevOps: CI/CD, Jenkins, Git, ServiceNow, Splunk</li>
-      <li>Databases: MySQL, SQLite, SQL Server</li>
-      <li>Cloud Certifications: AWS ML Specialty, Azure AI Engineer Associate, GCP Cloud Developer</li>
-    </ul>
-  </div>
-</section>
+      <div class="controls" style="margin-top:18px;">
+        <button onclick="switchTheme('solid')">Solid</button>
+        <button onclick="switchTheme('grid')">Grid</button>
+        <button onclick="switchTheme('striped')">Striped</button>
+        <button onclick="switchTheme('dark')">Dark</button>
 
-<section id="projects">
-  <div class="card">
-    <h2>Projects</h2>
-    <h3>AI-Based Bird Sound Analysis</h3>
-    <p>Developed ML pipeline using MFCC + LSTM for species classification, deployed with Bootstrap interface for biodiversity monitoring.</p>
-    <h3>LLM-Powered Chatbot</h3>
-    <p>Building chatbot applications with RAG pipelines and agent-based automation for enterprise conversational use cases.</p>
-    <h3>Incident Linking Automation (TCS)</h3>
-    <p>Converted manual runbook tasks into Python APIs, automating incident linking and streamlining enterprise workflows.</p>
-  </div>
-</section>
+        <!-- Download Resume -->
+        <a href="Loorthu_Kanishta_Resume.pdf" download>
+          <button style="margin-left:8px;">Download Resume</button>
+        </a>
+      </div>
+    </div>
+  </header>
 
-<section id="experience">
-  <div class="card">
-    <h2>Experience</h2>
-    <h3>Tata Consultancy Services (TCS)</h3>
-    <p>Python Developer | Application Tool Programmer | June 2024 – Present</p>
-    <ul>
-      <li>Automated incident workflows with Python APIs integrating ServiceNow, Splunk, Jenkins, and Git.</li>
-      <li>Developed RESTful APIs and CI/CD pipelines for reliable deployments.</li>
-      <li>Built LLM-powered chatbot applications with RAG and agentic models.</li>
-    </ul>
-  </div>
-</section>
+  <main>
 
-<section id="certifications">
-  <div class="card">
-    <h2>Certifications</h2>
-    <ul>
-      <li>AWS Certified Machine Learning – Specialty</li>
-      <li>AWS Certified Machine Learning Engineer – Associate</li>
-      <li>Microsoft Certified: Azure AI Engineer Associate (AI‑102)</li>
-      <li>Google Cloud Professional Cloud Developer</li>
-    </ul>
-  </div>
-</section>
+    <!-- About -->
+    <section id="about" data-aos="fade-right" data-aos-duration="900">
+      <div class="card">
+        <div class="about-grid">
+          <div>
+            <h2>About Me</h2>
+            <p>Passionate Python Developer & AI Engineer with experience building production ML systems, LLM-based assistants, and automation pipelines. I design and ship reliable, scalable solutions that solve real problems.</p>
 
-<section id="contact">
-  <div class="card">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:dloorthukanishta@gmail.com">dloorthukanishta@gmail.com</a></p>
-    <p>Phone: +91 9150108849</p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank">linkedin.com/in/loorthu-kanishta-d</a></p>
-    <p>GitHub: <a href="https://github.com/loorthu-kanishta-d" target="_blank">github.com/loorthu-kanishta-d</a></p>
-  </div>
-</section>
+            <div class="about-list" aria-hidden="false">
+              <div><span>Name</span><strong>Loorthu Kanishta D</strong></div>
+              <div><span>Experience</span><strong>3+ Years</strong></div>
+              <div><span>Specialization</span><strong>Web & AI Systems</strong></div>
+              <div><span>Email</span><strong>dloorthukanishta@gmail.com</strong></div>
+              <div><span>Phone</span><strong>+91 9150108849</strong></div>
+              <div><span>Location</span><strong>Tamil Nadu, India</strong></div>
+            </div>
+          </div>
 
-<footer>
-  <p>&copy; 2026 Loorthu Kanishta D | Tech Portfolio</p>
-</footer>
+          <div class="about-avatar" aria-hidden="true">
+            <!-- Placeholder avatar / illustration -->
+            <div>
+              <div style="font-size:1.1rem">Loorthu</div>
+              <div style="font-size:0.85rem; opacity:0.95; margin-top:6px">AI · Python · ML</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script>
-function switchTheme(pattern) {
-  document.body.className = pattern;
-}
-</script>
+    <!-- Skills -->
+    <section id="skills" data-aos="zoom-in" data-aos-duration="900">
+      <div class="card">
+        <h2>Skills</h2>
+        <div style="height:12px"></div>
+        <div class="skills-grid">
+          <div class="skill">
+            <strong>Python</strong>
+            <div class="progress" aria-hidden="true"><i style="width:92%"></i></div>
+          </div>
+          <div class="skill">
+            <strong>Machine Learning</strong>
+            <div class="progress"><i style="width:88%"></i></div>
+          </div>
+          <div class="skill">
+            <strong>Deep Learning</strong>
+            <div class="progress"><i style="width:80%"></i></div>
+          </div>
+          <div class="skill">
+            <strong>LLMs & RAG</strong>
+            <div class="progress"><i style="width:82%"></i></div>
+          </div>
+          <div class="skill">
+            <strong>Cloud (AWS/Azure/GCP)</strong>
+            <div class="progress"><i style="width:85%"></i></div>
+          </div>
+          <div class="skill">
+            <strong>DevOps & CI/CD</strong>
+            <div class="progress"><i style="width:72%"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Services -->
+    <section id="services" data-aos="fade-up" data-aos-duration="900">
+      <div class="card">
+        <h2>Services</h2>
+        <div style="height:12px"></div>
+        <div class="services-grid">
+          <div class="service">
+            <h3>AI Development</h3>
+            <p>LLM integrations, RAG pipelines, model fine-tuning, and production ML systems.</p>
+          </div>
+          <div class="service">
+            <h3>Automation</h3>
+            <p>Automating runbooks, incident workflows, and data pipelines using Python and cloud services.</p>
+          </div>
+          <div class="service">
+            <h3>API & Backend</h3>
+            <p>Designing RESTful APIs, microservices, and serverless endpoints for scalable apps.</p>
+          </div>
+          <div class="service">
+            <h3>Frontend & UX</h3>
+            <p>Responsive, accessible interfaces for web and mobile using React, Angular, and React Native.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" data-aos="fade-left" data-aos-duration="900">
+      <div class="card">
+        <h2>Selected Projects</h2>
+        <div style="height:12px"></div>
+        <div class="projects-stack">
+          <div class="project">
+            <div class="meta">AI Bird Sound</div>
+            <div>
+              <strong>AI-Based Bird Sound Analysis</strong>
+              <p style="margin:6px 0">MFCC + LSTM pipeline for species classification; deployed with a lightweight web UI for biodiversity monitoring.</p>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="meta">LLM Chatbot</div>
+            <div>
+              <strong>LLM-Powered Chatbot</strong>
+              <p style="margin:6px 0">RAG pipeline and agentic automation for enterprise conversational workflows and knowledge retrieval.</p>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="meta">TCS Automation</div>
+            <div>
+              <strong>Incident Linking Automation (TCS)</strong>
+              <p style="margin:6px 0">Converted manual runbook tasks into Python APIs; integrated with ServiceNow, Splunk, and CI/CD pipelines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" data-aos="fade-up" data-aos-duration="900">
+      <div class="card">
+        <h2>Experience</h2>
+        <div style="height:12px"></div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>Tata Consultancy Services (TCS)</h3>
+            <p style="margin:6px 0"><strong>Python Developer | Application Tool Programmer</strong> — June 2024 – Present</p>
+            <ul style="margin:6px 0 0 18px">
+              <li>Automated incident workflows with Python APIs integrating ServiceNow, Splunk, Jenkins, and Git.</li>
+              <li>Built LLM-powered chatbot applications and RAG pipelines for enterprise use cases.</li>
+              <li>Designed CI/CD pipelines and production deployment strategies.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" data-aos="zoom-in" data-aos-duration="900">
+      <div class="card">
+        <h2>Certifications</h2>
+        <div style="height:12px"></div>
+
+        <div class="cert-grid">
+          <!-- AWS ML Specialty -->
+          <div class="cert" data-aos="fade-up" data-aos-delay="80">
+            <img src="aws_ml_specialty_badge.png" alt="AWS ML Specialty Badge" />
+            <p>AWS Certified Machine Learning – Specialty</p>
+            <a href="AWS_ML_Specialty_Certificate.pdf" download><button>Download Certificate</button></a>
+          </div>
+
+          <!-- AWS ML Associate -->
+          <div class="cert" data-aos="fade-up" data-aos-delay="160">
+            <img src="aws_ml_associate_badge.png" alt="AWS ML Associate Badge" />
+            <p>AWS Certified Machine Learning – Associate</p>
+            <a href="AWS_ML_Associate_Certificate.pdf" download><button>Download Certificate</button></a>
+          </div>
+
+          <!-- Azure AI Engineer -->
+          <div class="cert" data-aos="fade-up" data-aos-delay="240">
+            <img src="azure_ai_engineer_badge.png" alt="Azure AI Engineer Badge" />
+            <p>Microsoft Certified: Azure AI Engineer Associate</p>
+            <a href="Azure_AI_Engineer_Certificate.pdf" download><button>Download Certificate</button></a>
+          </div>
+
+          <!-- GCP Cloud Developer -->
+          <div class="cert" data-aos="fade-up" data-aos-delay="320">
+            <img src="gcp_cloud_developer_badge.png" alt="GCP Cloud Developer Badge" />
+            <p>Google Cloud Professional Cloud Developer</p>
+            <a href="GCP_Cloud_Developer_Certificate.pdf" download><button>Download Certificate</button></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" data-aos="fade-right" data-aos-duration="900">
+      <div class="card">
+        <h2>Contact</h2>
+        <div style="height:12px"></div>
+        <div class="contact-grid">
+          <div>
+            <p style="margin:6px 0"><strong>Email</strong><br>dloorthukanishta@gmail.com</p>
+            <p style="margin:6px 0"><strong>Phone</strong><br>+91 9150108849</p>
+            <p style="margin:6px 0"><strong>Location</strong><br>Tamil Nadu, India</p>
+            <p style="margin:6px 0"><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/loorthu-kanishta-d-a7ba41325" target="_blank" rel="noopener">linkedin.com/in/loorthu-kanishta-d</a></p>
+            <p style="margin:6px 0"><strong>GitHub</strong><br><a href="https://github.com/loorthu-kanishta-d" target="_blank" rel="noopener">github.com/loorthu-kanishta-d</a></p>
+          </div>
+
+          <div>
+            <form class="contact-form" onsubmit="handleContact(event)">
+              <input type="text" id="name" placeholder="Your Name" required />
+              <input type="email" id="email" placeholder="Email Address" required />
+              <input type="text" id="subject" placeholder="Subject" />
+              <textarea id="message" rows="6" placeholder="Write your message..." required></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;padding:6px 20px;">
+      <small>&copy; <span id="year"></span> Loorthu Kanishta D — All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // Initialize AOS
+    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
+
+    // Theme switcher
+    function switchTheme(name){
+      document.body.classList.remove('solid','grid','striped','dark');
+      if(name === 'grid') document.body.classList.add('grid');
+      else if(name === 'striped') document.body.classList.add('striped');
+      else if(name === 'dark') document.body.classList.add('dark');
+      else document.body.classList.add('solid');
+    }
+
+    // Contact form handler (placeholder)
+    function handleContact(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      // Simple client-side validation
+      if(!name || !email || !message){
+        alert('Please fill name, email and message.');
+        return;
+      }
+
+      // This is a placeholder. Replace with your form endpoint or email integration.
+      alert('Thanks, ' + name + '! Your message has been noted. (This is a demo handler.)');
+
+      // Reset form
+      e.target.reset();
+    }
+
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Animate progress bars when skills section enters viewport
+    const skillsObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          document.querySelectorAll('.progress > i').forEach((el)=>{
+            const w = el.style.width || '80%';
+            el.style.width = w;
+          });
+          skillsObserver.disconnect();
+        }
+      });
+    }, {threshold:0.25});
+    const skillsSection = document.querySelector('#skills');
+    if(skillsSection) skillsObserver.observe(skillsSection);
+  </script>
 </body>
 </html>
