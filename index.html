@@ -5,74 +5,85 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Loorthu Kanishta D — Tech Portfolio</title>
 
-  <!-- AOS (Animate On Scroll) -->
+  <!-- AOS for subtle scroll animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
     :root{
-      --accent-1: #6b8e8f;
-      --accent-2: #7b6fa6;
-      --bg: #f6f7f9;
-      --card: #ffffff;
-      --muted: #6b7280;
+      --accent-1:#6b8e8f;
+      --accent-2:#7b6fa6;
+      --bg:#f4f7f6;
+      --card:#ffffff;
+      --muted:#6b7280;
       --glass: rgba(107,142,143,0.06);
+      --max-width:1100px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: "Inter", "Source Code Pro", monospace, system-ui, -apple-system;
-      background:var(--bg);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#eef6f2 0%, #f7f9fb 100%);
       color:#0f1724;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      scroll-behavior:smooth;
+      -webkit-font-feature-settings:"liga" 1;
+      -webkit-font-kerning:normal;
+    }
+
+    .wrap{max-width:var(--max-width);margin:28px auto;padding:0 20px 80px;position:relative}
+
+    /* Parallax natural background layer */
+    .bg-layer{
+      position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:0.06;
+      background-image:url('images/nature_bg.jpg');
+      background-size:cover;background-position:center;
+      transform:translateZ(0);
     }
 
     /* Header */
     header{
-      padding:56px 20px;
-      background:linear-gradient(180deg, rgba(123,111,166,0.06), rgba(107,142,143,0.03));
-      color:var(--accent-1);
+      display:flex;align-items:center;justify-content:space-between;gap:20px;padding:36px;border-radius:14px;
+      background:linear-gradient(180deg, rgba(123,111,166,0.03), rgba(107,142,143,0.01));
+      box-shadow:0 10px 40px rgba(15,23,36,0.04);
+      position:relative;overflow:visible;
     }
-    .hero{max-width:1100px;margin:0 auto;display:flex;gap:24px;align-items:center;justify-content:space-between}
-    .hero-left{max-width:720px}
+    .hero-left{flex:1;min-width:0}
     header h1{font-size:2.1rem;margin:0 0 6px;color:#0f1724}
     header p{margin:0 0 12px;color:var(--muted);font-size:1.02rem}
     .hero-cta{display:flex;gap:12px;align-items:center}
-    .btn{
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;
-      box-shadow:0 8px 20px rgba(107,142,143,0.08);
-    }
-    .btn.secondary{background:transparent;border:1px solid rgba(15,23,36,0.06);color:var(--muted);box-shadow:none}
+    .btn{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 10px 30px rgba(107,142,143,0.08)}
+    .counters{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+    .counter{background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));padding:10px 14px;border-radius:12px;min-width:120px;text-align:center;border:1px solid rgba(15,23,36,0.04)}
+    .counter strong{display:block;font-size:1.25rem;color:#0f1724}
 
-    main{max-width:1100px;margin:28px auto;padding:0 20px 80px}
-    section{margin:44px 0;position:relative}
+    /* Avatar card overlapping header */
+    .avatar-card{
+      width:160px;height:160px;border-radius:14px;background:linear-gradient(135deg,#eaf6f4,#f0eaf8);
+      display:flex;align-items:center;justify-content:center;box-shadow:0 18px 50px rgba(15,23,36,0.06);
+      position:absolute;right:20px;top: -40px;border:1px solid rgba(15,23,36,0.04);overflow:hidden;
+    }
+    .avatar-card img{width:100%;height:100%;object-fit:cover}
+
+    main{margin-top:48px}
+
+    /* Card style */
     .card{
       background:var(--card);
-      border-radius:12px;padding:22px;box-shadow:0 8px 30px rgba(15,23,36,0.04);
-      transition:transform .35s, box-shadow .35s;overflow:hidden;border:1px solid rgba(15,23,36,0.03);
+      border-radius:14px;padding:22px;margin-bottom:28px;
+      box-shadow:0 12px 40px rgba(15,23,36,0.04);border:1px solid rgba(15,23,36,0.03);
+      transition:transform .45s ease, box-shadow .45s ease;
+      position:relative;overflow:visible;
     }
-    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(15,23,36,0.06)}
 
-    h2{font-size:1.15rem;margin-bottom:10px;color:#0f1724}
+    h2{font-size:1.2rem;margin:0 0 12px;color:#0f1724}
     p{line-height:1.6;color:var(--muted)}
 
-    /* About layout */
-    .about-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center}
-    .about-avatar{
-      height:320px;border-radius:12px;background:linear-gradient(135deg,#eaf6f4,#f0eaf8);
-      display:flex;align-items:center;justify-content:center;color:#0f1724;font-weight:700;font-size:1.05rem;
-      box-shadow:0 10px 30px rgba(15,23,36,0.04);overflow:hidden;
-    }
+    /* About grid */
+    .about-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
     .about-list{display:grid;gap:10px;margin-top:12px}
     .about-list div{display:flex;justify-content:space-between;padding:10px 12px;border-radius:10px;background:var(--glass);color:var(--muted)}
-
-    .counters{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
-    .counter{background:linear-gradient(90deg, rgba(107,142,143,0.03), rgba(123,111,166,0.02));padding:10px 14px;border-radius:10px;min-width:120px;text-align:center}
-    .counter strong{display:block;font-size:1.25rem;color:#0f1724}
 
     /* Skills */
     .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
@@ -81,19 +92,29 @@
     .progress{height:10px;background:#eef3f4;border-radius:999px;overflow:hidden}
     .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));width:0%;transition:width 1.2s ease}
 
-    /* Services */
-    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-    .service{padding:14px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
+    /* Projects: compact logo + title layout, interactive cards */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:12px}
+    .project-card{
+      display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfcfd);
+      border:1px solid rgba(15,23,36,0.03);transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s, z-index .1s;
+      will-change:transform;transform-origin:center center;cursor:default;
+    }
+    .project-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 30px 70px rgba(15,23,36,0.10);z-index:6}
+    .project-logo{width:40px;height:40px;border-radius:6px;object-fit:cover;border:1px solid rgba(15,23,36,0.04);flex-shrink:0}
+    .project-body{flex:1;min-width:0}
+    .project-title{display:flex;align-items:center;gap:8px;justify-content:space-between}
+    .project-title h3{font-size:1rem;margin:0;color:#0f1724}
+    .project-desc{margin:6px 0 0;color:var(--muted);font-size:0.95rem}
+    .project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.82rem;color:var(--muted)}
 
-    /* Projects */
-    .projects-stack{display:grid;gap:12px}
-    .project{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
-    .project .meta{min-width:110px;font-weight:800;color:var(--accent-1)}
-    .tech-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .tech{background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.85rem;color:var(--muted)}
+    /* Overlap / mosaic effect for sections */
+    .mosaic-row{display:flex;gap:18px;align-items:stretch}
+    .mosaic-left{flex:1}
+    .mosaic-right{width:360px}
 
-    /* Experience timeline */
-    .timeline{position:relative;padding-left:16px}
+    /* Experience timeline compact */
+    .timeline{position:relative;padding-left:14px}
     .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));border-radius:3px}
     .timeline-item{position:relative;margin:18px 0 18px 16px}
     .timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--accent-2)}
@@ -101,30 +122,33 @@
     .company{font-weight:700;color:var(--muted);margin-bottom:6px}
     .exp-list{margin:8px 0 0 16px;color:var(--muted)}
 
-    /* Certifications */
-    .cert-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
-    .cert{width:200px;text-align:center;padding:12px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
-    .cert img{width:100px;height:auto;display:block;margin:0 auto 10px}
-    .cert p{margin:6px 0 10px;font-weight:700;color:#0f1724}
+    /* Certifications grid */
+    .cert-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;margin-top:12px}
+    .cert{width:180px;text-align:center;padding:12px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,36,0.03)}
+    .cert img{width:88px;height:auto;display:block;margin:0 auto 8px}
+    .cert p{margin:6px 0 0;font-weight:700;color:#0f1724}
 
-    /* Contact */
+    /* Contact form */
     .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
     .contact-form input,.contact-form textarea{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid rgba(15,23,36,0.06);background:#fff;color:#0f1724}
     .contact-form button{display:inline-block;margin-top:8px}
 
-    footer{padding:18px 20px;text-align:center;color:var(--muted);background:transparent;margin-top:30px}
+    footer{padding:18px 0;text-align:center;color:var(--muted);background:transparent;margin-top:20px}
 
     @media (max-width:980px){
-      .about-grid,.contact-grid{grid-template-columns:1fr}
-      header h1{font-size:1.6rem}
-      .about-avatar{height:220px}
+      .about-grid{grid-template-columns:1fr}
+      .mosaic-row{flex-direction:column}
+      .mosaic-right{width:100%}
+      .avatar-card{display:none}
+      .projects-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
     }
   </style>
 </head>
 <body>
+  <div class="bg-layer" aria-hidden="true"></div>
 
-  <header data-aos="fade-down" data-aos-duration="800">
-    <div class="hero">
+  <div class="wrap">
+    <header data-aos="fade-down" data-aos-duration="800">
       <div class="hero-left">
         <h1>Loorthu Kanishta D</h1>
         <p>AI Engineer · Python Developer · ML Engineer · Data Scientist — building production ML systems and LLM assistants that scale.</p>
@@ -133,14 +157,14 @@
           <a class="btn" href="#contact">Get in Touch</a>
         </div>
 
-        <div class="counters" style="margin-top:14px;">
+        <div class="counters" aria-hidden="false">
           <div class="counter" data-aos="fade-up" data-aos-delay="120">
-            <strong id="counter-exp">3+</strong>
+            <strong id="counter-exp">2+</strong>
             <span style="color:var(--muted)">Years Experience</span>
           </div>
           <div class="counter" data-aos="fade-up" data-aos-delay="180">
-            <strong id="counter-projects">10+</strong>
-            <span style="color:var(--muted)">Projects Delivered</span>
+            <strong id="counter-projects">25+</strong>
+            <span style="color:var(--muted)">Projects Delivered (office)</span>
           </div>
           <div class="counter" data-aos="fade-up" data-aos-delay="240">
             <strong id="counter-cert">4</strong>
@@ -149,67 +173,98 @@
         </div>
       </div>
 
-      <div class="about-avatar" data-aos="zoom-in" data-aos-delay="300">
-        <img src="images/tech_avatar.png" alt="Tech avatar illustration" style="width:88%;border-radius:8px;max-width:300px" />
+      <div class="avatar-card" aria-hidden="true">
+        <img src="images/tech_avatar.png" alt="Tech avatar illustration" />
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
+    <main>
+      <!-- About + Highlights mosaic -->
+      <section class="card" id="about" data-aos="fade-up" data-aos-duration="700">
+        <div class="mosaic-row">
+          <div class="mosaic-left">
+            <h2>About Me</h2>
+            <p>I design and ship production-grade AI systems and developer tools. My focus is on building robust ML pipelines, integrating LLMs into enterprise workflows, and automating operational tasks. I enjoy turning research ideas into reliable products and helping teams adopt best practices for deployment and observability.</p>
 
-    <section id="about" data-aos="fade-right" data-aos-duration="800">
-      <div class="card">
-        <h2>About Me</h2>
-        <p>I design and ship production-grade AI systems and developer tools. My focus is on building robust ML pipelines, integrating LLMs into enterprise workflows, and automating operational tasks. I enjoy turning research ideas into reliable products and helping teams adopt best practices for deployment and observability.</p>
+            <div style="height:12px"></div>
 
-        <div style="height:12px"></div>
+            <div class="about-grid">
+              <div>
+                <p style="margin-bottom:8px"><strong>Summary</strong></p>
+                <p>Hands-on experience across the ML lifecycle: data ingestion and feature engineering, model training and evaluation, model optimization and deployment, and monitoring in production. I combine backend engineering (APIs, microservices, CI/CD) with ML expertise to deliver end-to-end solutions.</p>
 
-        <div class="about-grid">
-          <div>
-            <p style="margin-bottom:8px"><strong>Summary</strong></p>
-            <p>Hands-on experience across the ML lifecycle: data ingestion and feature engineering, model training and evaluation, model optimization and deployment, and monitoring in production. I combine backend engineering (APIs, microservices, CI/CD) with ML expertise to deliver end-to-end solutions.</p>
+                <div class="about-list" aria-hidden="false">
+                  <div><span>Name</span><strong>Loorthu Kanishta D</strong></div>
+                  <div><span>Experience</span><strong>2+ Years</strong></div>
+                  <div><span>Specialization</span><strong>AI Systems, Automation, Backend</strong></div>
+                  <div><span>Email</span><strong>dloorthukanishta@gmail.com</strong></div>
+                  <div><span>Location</span><strong>Tamil Nadu, India</strong></div>
+                </div>
+              </div>
 
-            <div class="about-list" aria-hidden="false">
-              <div><span>Name</span><strong>Loorthu Kanishta D</strong></div>
-              <div><span>Experience</span><strong>3+ Years</strong></div>
-              <div><span>Specialization</span><strong>AI Systems, Automation, Backend</strong></div>
-              <div><span>Email</span><strong>dloorthukanishta@gmail.com</strong></div>
-              <div><span>Location</span><strong>Tamil Nadu, India</strong></div>
-            </div>
-          </div>
+              <div>
+                <p style="margin:0 0 6px"><strong>Technical Highlights</strong></p>
+                <ul style="margin:0 0 0 18px; color:var(--muted)">
+                  <li>Production ML: SageMaker, model serving, A/B testing, drift detection</li>
+                  <li>LLMs & RAG: Retrieval pipelines, vector stores, prompt engineering</li>
+                  <li>Backend & APIs: Django, FastAPI, REST, serverless functions</li>
+                  <li>DevOps: CI/CD, Docker, Kubernetes, Jenkins</li>
+                  <li>Monitoring: Prometheus, Grafana, logging, observability</li>
+                </ul>
 
-          <div>
-            <div style="margin-bottom:12px">
-              <p style="margin:0 0 6px"><strong>Technical Highlights</strong></p>
-              <ul style="margin:0 0 0 18px; color:var(--muted)">
-                <li>Production ML: SageMaker, model serving, A/B testing, drift detection</li>
-                <li>LLMs & RAG: Retrieval pipelines, vector stores, prompt engineering</li>
-                <li>Backend & APIs: Django, FastAPI, REST, serverless functions</li>
-                <li>DevOps: CI/CD, Docker, Kubernetes, Jenkins</li>
-                <li>Monitoring: Prometheus, Grafana, logging, observability</li>
-              </ul>
-            </div>
-
-            <div style="margin-top:8px">
-              <p style="margin:0 0 6px"><strong>Tools & Frameworks</strong></p>
-              <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <span class="tech">Python</span>
-                <span class="tech">PyTorch</span>
-                <span class="tech">TensorFlow</span>
-                <span class="tech">Hugging Face</span>
-                <span class="tech">SageMaker</span>
-                <span class="tech">Docker</span>
-                <span class="tech">Kubernetes</span>
-                <span class="tech">Postgres</span>
+                <div style="margin-top:12px">
+                  <p style="margin:0 0 6px"><strong>Tools & Frameworks</strong></p>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Python</span>
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">PyTorch</span>
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">TensorFlow</span>
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Hugging Face</span>
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">SageMaker</span>
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Docker</span>
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Kubernetes</span>
+                    <span style="background:#f3f6f6;padding:6px 8px;border-radius:8px;font-size:0.9rem;color:var(--muted)">Postgres</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="skills" data-aos="zoom-in" data-aos-duration="800">
-      <div class="card">
+          <aside class="mosaic-right" aria-hidden="true">
+            <!-- small visual highlights stacked -->
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfcfd);box-shadow:0 8px 24px rgba(15,23,36,0.04);border:1px solid rgba(15,23,36,0.03)">
+                <strong style="display:block;margin-bottom:6px;color:#0f1724">Quick Stats</strong>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <div style="background:var(--glass);padding:8px;border-radius:8px;min-width:100px;text-align:center">
+                    <div style="font-weight:800">2+</div>
+                    <div style="color:var(--muted)">Years</div>
+                  </div>
+                  <div style="background:var(--glass);padding:8px;border-radius:8px;min-width:100px;text-align:center">
+                    <div style="font-weight:800">25+</div>
+                    <div style="color:var(--muted)">Projects</div>
+                  </div>
+                  <div style="background:var(--glass);padding:8px;border-radius:8px;min-width:100px;text-align:center">
+                    <div style="font-weight:800">4</div>
+                    <div style="color:var(--muted)">Certs</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfcfd);box-shadow:0 8px 24px rgba(15,23,36,0.04);border:1px solid rgba(15,23,36,0.03)">
+                <strong style="display:block;margin-bottom:8px;color:#0f1724">Focus Areas</strong>
+                <ul style="margin:0 0 0 16px;color:var(--muted)">
+                  <li>LLM Integrations & RAG</li>
+                  <li>Production ML Systems</li>
+                  <li>Automation & Tooling</li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="card" id="skills" data-aos="fade-up" data-aos-duration="700">
         <h2>Skills</h2>
         <p>Practical, production-focused skills across ML, backend engineering, and cloud infrastructure.</p>
 
@@ -251,82 +306,68 @@
             <div class="progress"><i style="width:88%"></i></div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="projects" data-aos="fade-left" data-aos-duration="800">
-      <div class="card">
+      <!-- Projects: only three highlighted, logos small and inline -->
+      <section class="card" id="projects" data-aos="fade-up" data-aos-duration="700">
         <h2>Selected Projects</h2>
-        <p>Representative work showing end-to-end delivery, production readiness, and measurable impact.</p>
+        <p>Representative work showing end-to-end delivery, production readiness, and measurable impact. (I completed 25+ projects during office work; below are three highlighted ones.)</p>
 
-        <div style="height:12px"></div>
-        <div class="projects-stack">
-
-          <div class="project" data-aos="fade-up" data-aos-delay="80">
-            <div class="meta">AI Bird Sound</div>
-            <div>
-              <strong>AI-Based Bird Sound Analysis</strong>
-              <p style="margin:6px 0">Built a full pipeline to detect and classify bird species from audio recordings. Preprocessing used noise reduction and MFCC features; model was an LSTM ensemble with confidence calibration. Deployed as a serverless inference endpoint with batch processing and a lightweight dashboard for conservation teams.</p>
-              <div class="tech-list">
-                <span class="tech">Python</span><span class="tech">Librosa</span><span class="tech">PyTorch</span><span class="tech">AWS Lambda</span>
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Bird Sound -->
+          <article class="project-card zoom-in" data-aos="fade-up" data-aos-delay="80">
+            <img class="project-logo" src="images/bird_waveform.png" alt="Bird sound logo" />
+            <div class="project-body">
+              <div class="project-title">
+                <h3>AI Bird Sound</h3>
+                <span style="color:var(--muted)">Audio ML</span>
               </div>
-              <div style="margin-top:10px">
-                <img src="images/bird_waveform.png" alt="Bird sound waveform thumbnail" style="width:100%;border-radius:8px;max-width:520px" />
+              <div class="project-desc">Built a full pipeline to detect and classify bird species from audio recordings. Preprocessing used noise reduction and MFCC features; model was an LSTM ensemble with confidence calibration. Deployed as a serverless inference endpoint with batch processing and a lightweight dashboard for conservation teams.</div>
+              <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Librosa</span><span class="tag">PyTorch</span><span class="tag">AWS Lambda</span>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project" data-aos="fade-up" data-aos-delay="160">
-            <div class="meta">LLM Chatbot</div>
-            <div>
-              <strong>LLM-Powered Chatbot Platform</strong>
-              <p style="margin:6px 0">Designed a RAG pipeline using vector search and chunked documents to provide accurate answers from internal knowledge bases. Implemented prompt templates, safety filters, and a feedback loop to improve retrieval quality. Integrated with Slack and internal ticketing systems for automated triage.</p>
-              <div class="tech-list">
-                <span class="tech">Hugging Face</span><span class="tech">FAISS</span><span class="tech">FastAPI</span><span class="tech">Docker</span>
+          <!-- LLM Chatbot -->
+          <article class="project-card zoom-in" data-aos="fade-up" data-aos-delay="160">
+            <img class="project-logo" src="images/project_chatbot_thumb.png" alt="LLM chatbot logo" />
+            <div class="project-body">
+              <div class="project-title">
+                <h3>LLM Chatbot</h3>
+                <span style="color:var(--muted)">RAG · Conversational AI</span>
               </div>
-              <div style="margin-top:10px">
-                <img src="images/project_chatbot_thumb.png" alt="LLM chatbot project thumbnail" style="width:100%;border-radius:8px;max-width:520px" />
+              <div class="project-desc">Designed a RAG pipeline using vector search and chunked documents to provide accurate answers from internal knowledge bases. Implemented prompt templates, safety filters, and a feedback loop to improve retrieval quality. Integrated with Slack and internal ticketing systems for automated triage.</div>
+              <div class="project-tags">
+                <span class="tag">Hugging Face</span><span class="tag">FAISS</span><span class="tag">FastAPI</span><span class="tag">Docker</span>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project" data-aos="fade-up" data-aos-delay="240">
-            <div class="meta">TCS Automation</div>
-            <div>
-              <strong>Incident Linking Automation (TCS)</strong>
-              <p style="margin:6px 0">Converted manual runbook tasks into Python APIs and automation scripts. Integrated with ServiceNow, Jenkins, and Splunk to automatically link related incidents, reducing manual effort and mean time to resolution. Added observability and retry logic for reliability.</p>
-              <div class="tech-list">
-                <span class="tech">Django</span><span class="tech">ServiceNow</span><span class="tech">Splunk</span><span class="tech">Jenkins</span>
+          <!-- Automation -->
+          <article class="project-card zoom-in" data-aos="fade-up" data-aos-delay="240">
+            <img class="project-logo" src="images/aws_ml_specialty.png" alt="Automation logo" />
+            <div class="project-body">
+              <div class="project-title">
+                <h3>TCS Automation</h3>
+                <span style="color:var(--muted)">Runbook Automation</span>
+              </div>
+              <div class="project-desc">Converted manual runbook tasks into Python APIs and automation scripts. Integrated with ServiceNow, Jenkins, and Splunk to automatically link related incidents, reducing manual effort and mean time to resolution. Added observability and retry logic for reliability.</div>
+              <div class="project-tags">
+                <span class="tag">Django</span><span class="tag">ServiceNow</span><span class="tag">Splunk</span><span class="tag">Jenkins</span>
               </div>
             </div>
-          </div>
-
-          <div class="project" data-aos="fade-up" data-aos-delay="320">
-            <div class="meta">Portfolio App</div>
-            <div>
-              <strong>Wealth Management Mobile App</strong>
-              <p style="margin:6px 0">Contributed to UI/UX and API integration for a mobile portfolio app supporting real-time portfolio monitoring, transaction history, and secure authentication. Implemented offline caching and optimized network usage for mobile performance.</p>
-              <div class="tech-list">
-                <span class="tech">React Native</span><span class="tech">Expo</span><span class="tech">REST</span><span class="tech">SQLite</span>
-              </div>
-              <div style="margin-top:10px">
-                <img src="images/project_wealth_thumb.png" alt="Wealth management app thumbnail" style="width:100%;border-radius:8px;max-width:520px" />
-              </div>
-            </div>
-          </div>
-
+          </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="experience" data-aos="fade-up" data-aos-duration="800">
-      <div class="card">
+      <!-- Experience -->
+      <section class="card" id="experience" data-aos="fade-up" data-aos-duration="700">
         <h2>Experience</h2>
         <p>Detailed roles and accomplishments showing progression, impact, and technical ownership.</p>
 
         <div style="height:12px"></div>
         <div class="timeline">
-
           <div class="timeline-item" data-aos="fade-up" data-aos-delay="80">
             <div class="company">Tata Consultancy Services</div>
             <div class="role">AI Software Engineer — Feb 2026 - Present (Full-time)</div>
@@ -365,19 +406,15 @@
               </ul>
             </div>
           </div>
-
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="certifications" data-aos="zoom-in" data-aos-duration="800">
-      <div class="card">
+      <!-- Certifications -->
+      <section class="card" id="certifications" data-aos="fade-up" data-aos-duration="700">
         <h2>Certifications</h2>
         <p>Cloud and AI badges (images only).</p>
 
-        <div style="height:12px"></div>
         <div class="cert-grid">
-
           <div class="cert" data-aos="fade-up" data-aos-delay="80">
             <img src="images/aws_ml_specialty.png" alt="AWS Certified Machine Learning — Specialty" />
             <p>AWS Certified Machine Learning — Specialty</p>
@@ -397,13 +434,11 @@
             <img src="images/gcp_cloud_developer.png" alt="Google Cloud Professional Cloud Developer" />
             <p>Google Cloud Professional Cloud Developer</p>
           </div>
-
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact" data-aos="fade-right" data-aos-duration="800">
-      <div class="card">
+      <!-- Contact -->
+      <section class="card" id="contact" data-aos="fade-up" data-aos-duration="700">
         <h2>Contact</h2>
         <p>I'm open to full-time roles and collaborations. Available for daytime, full-time positions — share a brief about your project or role and I'll respond promptly.</p>
 
@@ -426,24 +461,21 @@
             </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-  </main>
+      <footer>
+        <small>&copy; <span id="year"></span> Loorthu Kanishta D — All rights reserved.</small>
+      </footer>
+    </main>
+  </div>
 
-  <footer>
-    <div style="max-width:1100px;margin:0 auto;padding:6px 20px;">
-      <small>&copy; <span id="year"></span> Loorthu Kanishta D — All rights reserved.</small>
-    </div>
-  </footer>
-
+  <!-- AOS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script>
     AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-
+    // Contact demo handler
     function handleContact(e){
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
@@ -454,6 +486,7 @@
       e.target.reset();
     }
 
+    // Animate progress bars when skills section enters viewport
     const skillsObserver = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -468,45 +501,25 @@
     const skillsSection = document.querySelector('#skills');
     if(skillsSection) skillsObserver.observe(skillsSection);
 
-    const cards = document.querySelectorAll('.card');
-    const cardObserver = new IntersectionObserver((entries)=>{
+    // Zoom-in effect for project cards and other elements
+    const zoomEls = document.querySelectorAll('.zoom-in');
+    const zoomObserver = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.style.transform = 'translateY(0)';
-          entry.target.style.opacity = '1';
-          cardObserver.unobserve(entry.target);
-        }
+        if(entry.isIntersecting) entry.target.classList.add('in-view');
+        else entry.target.classList.remove('in-view');
       });
-    }, {threshold:0.12});
-    cards.forEach(c=>{
-      c.style.transform = 'translateY(12px)';
-      c.style.opacity = '0';
-      cardObserver.observe(c);
+    }, {threshold:0.28});
+    zoomEls.forEach(el => zoomObserver.observe(el));
+
+    // Parallax background subtle movement
+    const bg = document.querySelector('.bg-layer');
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      bg.style.transform = `translateY(${y * 0.06}px)`;
     });
 
-    function animateCounter(id, to, duration=800){
-      const el = document.getElementById(id);
-      if(!el) return;
-      let start = 0;
-      const step = Math.max(1, Math.round(to / (duration / 30)));
-      const iv = setInterval(()=>{
-        start += step;
-        if(start >= to){ start = to; clearInterval(iv); }
-        el.textContent = start + (id==='counter-exp' ? '+' : '');
-      }, 30);
-    }
-    const aboutObs = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          animateCounter('counter-exp', 3, 800);
-          animateCounter('counter-projects', 10, 800);
-          animateCounter('counter-cert', 4, 800);
-          aboutObs.disconnect();
-        }
-      });
-    }, {threshold:0.3});
-    const aboutSection = document.querySelector('#about');
-    if(aboutSection) aboutObs.observe(aboutSection);
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
